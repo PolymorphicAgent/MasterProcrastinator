@@ -1,0 +1,440 @@
+/* 
+    Master Procrastinator
+    Dark blue/purple aesthetic with smooth cards, rounded corners, and background shadows.
+    Supports light/dark themes via data-theme on :root.
+*/
+
+:root {
+  --bg: #0b1020;
+  --surface: #111733;
+  --surface-2: #0f1630;
+  --text: #eaeaff;
+  --link: #00f5d4;
+  --muted: #a9b1d6;
+  --primary: #7c3aed;
+  --primary-500: #8b5cf6;
+  --accent: #3b82f6;
+  --ring: #a78bfa55;
+  --card-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --border: #29304d;
+} 
+
+:root[data-theme="light"] {
+  --bg: #f9f9fc;               /* much brighter background */
+  --surface: #ffffff;          /* pure white cards */
+  --surface-2: #f1f3f9;        /* soft gray-blue secondary surfaces */
+  --text: #1a1b26;             /* near-black text */
+  --link: #0051ff;             /* blue links */
+  --muted: #5e627a;            /* subdued gray for descriptions */
+  --primary: #6d28d9;          /* purple accent */
+  --primary-500: #7c3aed;
+  --accent: #2563eb;           /* blue accent */
+  --ring: rgba(109, 40, 217, 0.35); /* focus outline */
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* softer shadow */
+  --border: #d8dcee;           /* light gray borders */
+}
+
+/* Light theme background override */
+:root[data-theme="light"] body {
+  background: radial-gradient(1000px 600px at 5% -5%, #e8eaff 0%, transparent 60%),
+              radial-gradient(1000px 600px at 100% 10%, #eef2ff 0%, transparent 60%),
+              var(--bg);
+}
+
+/* Light theme for headers, toolbar, and UI chrome */
+:root[data-theme="light"] header,
+:root[data-theme="light"] .toolbar,
+:root[data-theme="light"] .modal,
+:root[data-theme="light"] .file-upload,
+:root[data-theme="light"] input,
+:root[data-theme="light"] textarea,
+:root[data-theme="light"] select,
+:root[data-theme="light"] button {
+  background-color: var(--surface);
+  color: var(--text);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
+}
+
+/* Buttons in light mode */
+:root[data-theme="light"] button {
+  background-color: var(--primary);
+  color: #fff;
+}
+:root[data-theme="light"] button.secondary {
+  background-color: var(--surface-2);
+  color: var(--text);
+}
+
+/* Inputs / text areas in light mode */
+:root[data-theme="light"] input,
+:root[data-theme="light"] textarea,
+:root[data-theme="light"] select {
+  background-color: var(--surface-2);
+  color: var(--text);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 600px at 10% -10%, #1f1140 0%, transparent 60%),
+              radial-gradient(1000px 600px at 120% 10%, #0a1a4a 0%, transparent 60%),
+              var(--bg);
+}
+
+header,
+.toolbar,
+.modal,
+.file-upload {
+  background-color: var(--surface);
+  color: var(--text);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
+}
+
+/* Header */
+.app-header {
+  position: sticky;
+  top: 0;
+  backdrop-filter: saturate(140%) blur(8px);
+  background: color-mix(in oklab, var(--bg) 85%, transparent);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  z-index: 50;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.3px;
+}
+.logo {
+  width: 70px; height: 70px;
+  padding: 0px 0px;
+  /* background: linear-gradient(135deg, var(--primary), var(--accent)); */
+  /* box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 40%, transparent); */
+}
+
+/* Typing Title */
+.typing-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 3.5rem;
+    color: var(--text);
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    border-right: 3px solid #00f5d4;
+    animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+.glitch::after {
+    content: attr(data-text);
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+color: var(--text);
+text-shadow:
+        3px 0 red,
+        -4px 0 cyan,
+        0 5px blue;
+mix-blend-mode: screen;
+pointer-events: none;
+animation: glitch-color 2.5s infinite ease-in-out alternate;
+}
+
+@keyframes glitch-color {
+    0%   { transform: translate(0px, 0px); opacity: 1; }
+    20%  { transform: translate(-1px, 1px); }
+    40%  { transform: translate(1px, -1px); }
+    60%  { transform: translate(0.5px, 1.5px); }
+    80%  { transform: translate(-1.5px, -0.5px); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes glitch {
+    0% { clip-path: inset(0 0 85% 0); transform: translate(0.5px, -0.5px); }
+    20% { clip-path: inset(25% 0 55% 0); transform: translate(-1px, 0.5px); }
+    40% { clip-path: inset(45% 0 35% 0); transform: translate(-0.5px, 1px); }
+    60% { clip-path: inset(65% 0 20% 0); transform: translate(1px, -1px); }
+    80% { clip-path: inset(85% 0 0 0); transform: translate(0.5px, 1px); }
+    100% { clip-path: inset(100% 0 0 0); transform: translate(-1px, -1px); }
+}
+
+p {
+    font-size: 1.2rem;
+    font-family: 'Fira Code', monospace;
+    color: var(--text);
+    margin: 1rem 0 1.75rem 0;
+}
+
+.glitch-text {
+    animation: glitch 1s infinite;
+}
+
+
+/* Buttons */
+button, .file-label > span {
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface) 70%, var(--primary) 30%);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform .06s ease, box-shadow .2s, background .2s, border-color .2s;
+  box-shadow: var(--card-shadow);
+}
+
+button:active { transform: translateY(1px); }
+button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  padding: 8px 12px;
+  border-color: transparent;
+}
+.secondary-btn {
+  background: color-mix(in oklab, var(--surface) 70%, var(--primary) 30%);
+}
+.ghost-btn {
+  background: transparent;
+  border-color: var(--border);
+  box-shadow: none;
+}
+.small { padding: 6px 10px; font-size: 13px; }
+
+.file-actions { display: flex; gap: 10px; align-items: center; }
+.file-label input { display: none; }
+
+/* Layout */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+@media (max-width: 980px) {
+  .container { grid-template-columns: 1fr; }
+}
+
+/* Panels */
+.list-panel {
+  background: color-mix(in oklab, var(--surface) 80%, #000 20%);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  overflow: clip;
+}
+.panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface-2) 60%, transparent);
+}
+.panel-header h2 { margin: 0; font-size: 16px; letter-spacing: 0.3px; }
+.panel-tools { display: flex; gap: 10px; align-items: center; }
+.panel-tools input, .panel-tools select {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+  width: 100%;
+  height: 12px;
+  background: var(--surface, --bg);
+  border-radius: 6px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent, #6a5acd);
+  transition: width 0.3s;
+}
+
+/* Todo list */
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 14px;
+  min-height: 120px;
+}
+.todo-list.completed .todo-item { opacity: .8; }
+
+.todo-item {
+  display: grid;
+  grid-template-columns: 6px 24px 24px 48px 1fr;
+  align-items: center;
+  gap: 12px;
+  background: color-mix(in oklab, var(--surface) 85%, #000 15%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 10px 12px;
+  margin: 10px 0;
+  box-shadow: var(--card-shadow);
+}
+
+.todo-item.dragging {
+  opacity: 0.75;
+  outline: 2px dashed var(--primary-500);
+}
+.color-strip {
+  width: 6px; height: 100%;
+  border-radius: 12px;
+  background: var(--primary);
+}
+.drag-handle { cursor: grab; user-select: none; text-align: center; opacity: .8; }
+.drag-handle:active { cursor: grabbing; }
+.check { width: 20px; height: 20px; }
+.icon {
+  width: 44px; height: 44px; object-fit: cover; border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface-2) 70%, transparent);
+  display: none;
+}
+
+.content { display: grid; gap: 8px; }
+.content .row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+}
+.title { margin: 0; font-size: 16px; }
+.due { font-size: 13px; color: var(--muted); }
+.desc { margin: 0; color: var(--muted); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 15px;}
+
+.attachments { display: flex; flex-wrap: wrap; gap: 8px; }
+.attachment-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px dashed var(--border); border-radius: 12px; padding: 6px 8px;
+  font-size: 12px; background: color-mix(in oklab, var(--surface) 85%, transparent);
+  color: var(--link);
+}
+.attachment-pill img { width: 18px; height: 18px; object-fit: cover; border-radius: 4px; }
+
+.item-actions { display: flex; gap: 8px; }
+
+/* Dialog */
+dialog {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  width: min(720px, 92vw);
+  padding: 0;
+}
+dialog::backdrop { background: rgba(3,6,20,.55); }
+
+.dialog-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface-2) 60%, transparent);
+}
+.dialog-header h3 { margin: 0; font-size: 18px; }
+
+.form-grid {
+  display: grid; gap: 14px; padding: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+.form-grid label { display: grid; gap: 6px; }
+.form-grid input[type="text"],
+.form-grid input[type="date"],
+.form-grid input[type="color"],
+.form-grid textarea {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+.span-2 { grid-column: span 2; }
+
+.attachment-preview {
+  display: flex; flex-wrap: wrap; gap: 10px; padding: 0 16px 8px;
+}
+.preview-card {
+  border: 1px dashed var(--border); border-radius: 12px; padding: 8px;
+  display: grid; gap: 6px; width: 180px;
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+}
+.preview-card img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; }
+
+.dialog-actions {
+  display: flex; gap: 10px; justify-content: flex-end; padding: 12px 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* Footer */
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+  box-shadow: var(--card-shadow);
+  /* padding: 2rem; */
+  /* border-top: 1px solid var(--border); */
+  color: var(--text-color);
+  font-size: 0.95rem;
+  text-align: center;
+  /* border-radius: 0 0 20px 20px; */
+}
+
+footer input[type="number"] {
+  width: 90px;
+  padding: 0.2rem 0.5rem;
+  background: var(--bg);
+  /* border: 1px solid #444; */
+  border-radius: 8px;
+  /* max-width: 1100px; margin: 12px auto 40px; padding: 0 16px; */
+  color: var(--muted); font-size: 13px; text-align: center;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+footer a { color: var(--primary-500); text-decoration: none; }
+
+footer .particle-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text);
+  background: var(--surface-2);
+  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+/* Completed styles */
+.todo-item.completed .title { text-decoration: line-through; opacity: .8; }
+.todo-item.completed .desc { opacity: .7; }
+
+/* Helpful utility classes */
+.hidden { display: none !important; }

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Master Procrastinator</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="img/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand center-screen">
+      <img src="img/1920.png" alt="" class="logo" />
+      <div class="typing-title glitch" style="margin: auto;" data-text="Master Procrastinator">Master Procrastinator</div>
+    </div>
+    <div class="header-actions">
+        <button id="newItemBtn" class="primary-btn">New Task</button>
+        <button id="themeToggle" class="ghost-btn" style="padding: 5px 5px;" title="Toggle light/dark">🌗</button>
+        <button id="settingsBtn" class="ghost-btn" style="padding: 5px 5px;" title="Open Settings">⚙️</button>
+      <div class="file-actions" style="margin-top: 10px;">
+        <button id="exportBtn" class="secondary-btn">⭳ Export</button>
+        <label class="file-label">
+          <input type="file" id="importFile" accept=".json" />
+          <button id="importBtn" class="secondary-btn">⭡ Import</button>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <!-- Progress UI -->
+  <div id="progressBarContainer" class="progress-bar-container" title="Progress">
+    <div id="progressBar"></div>
+  </div>
+
+  <main class="container">
+    <section class="list-panel">
+      <div class="panel-header">
+        <h2>Active Tasks</h2>
+        <div class="panel-tools">
+          <input id="searchInput" type="search" placeholder="Filter by title…" />
+          <select id="sortSelect" title="Sort">
+            <option value="manual">Manual</option>
+            <option value="dueAsc">Due date ↑</option>
+            <option value="dueDesc">Due date ↓</option>
+            <option value="title">Title A-Z</option>
+          </select>
+        </div>
+      </div>
+      <ul id="todoList" class="todo-list" aria-live="polite"></ul>
+    </section>
+
+    <section class="list-panel">
+      <div class="panel-header">
+        <h2>Completed</h2>
+        <button id="clearCompletedBtn" class="ghost-btn">Clear</button>
+      </div>
+      <ul id="completedList" class="todo-list completed"></ul>
+    </section>
+  </main>
+
+  <!-- Settings Modal -->
+  <dialog id="settingsModal">
+    <form method="dialog" id="settingsItemForm">
+      <header class="dialog-header">
+        <h3 id="dialogTitle">Settings</h3>
+        <button type="button" class="ghost-btn close-btn" id="closeSettingsBtn" aria-label="Close">✕</button>
+      </header>
+
+      <div class="form-grid">
+        <label>
+          <input type="checkbox" id="autosaveAttachmentsToggle">Autosave attachments to IndexedDB (it is highly recommended to enable this)
+        </label>
+      </div>
+      <menu class="dialog-actions">
+        <button class="primary-btn">Useless Button</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <!-- New/Edit Item Dialog -->
+  <dialog id="itemDialog">
+    <form method="dialog" id="itemForm">
+      <header class="dialog-header">
+        <h3 id="dialogTitle">New Task</h3>
+        <button type="button" class="ghost-btn close-btn" id="closeDialogBtn" aria-label="Close">✕</button>
+      </header>
+
+      <div class="form-grid">
+        <label>
+          <span>Title</span>
+          <input type="text" id="titleInput" required placeholder="eg. Calc homework 1" />
+        </label>
+
+        <label>
+          <span>Due date</span>
+          <input type="date" id="dueInput" />
+        </label>
+
+        <label class="span-2">
+          <span>Description</span>
+          <textarea id="descInput" rows="4" placeholder="What needs to be done?"></textarea>
+        </label>
+
+        <label>
+          <span>Accent color</span>
+          <input type="color" id="colorInput" value="#6d28d9" />
+        </label>
+
+        <label>
+          <span>Icon/thumbnail</span>
+          <input type="file" id="iconInput" accept="image/*" />
+        </label>
+
+        <label class="span-2">
+          <span>Attach files</span>
+          <input type="file" id="filesInput" multiple />
+        </label>
+      </div>
+
+      <div id="attachmentPreview" class="attachment-preview"></div>
+
+      <menu class="dialog-actions">
+        <button value="cancel" class="secondary-btn">Cancel</button>
+        <button id="saveItemBtn" value="default" class="primary-btn">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <template id="itemTemplate">
+    <li class="todo-item" draggable="true">
+      <div class="color-strip"></div>
+      <div class="drag-handle" title="Drag to reorder" aria-label="Drag">⋮⋮</div>
+      <input type="checkbox" class="check" title="Mark complete" />
+      <img class="icon" alt="" />
+      <div class="content">
+        <div class="row">
+          <h3 class="title"></h3>
+          <time class="due"></time>
+        </div>
+        <p class="desc"></p>
+        <div class="attachments"></div>
+        <div class="item-actions">
+          <button class="ghost-btn small edit-btn">Edit</button>
+          <button class="ghost-btn small duplicate-btn">Duplicate</button>
+          <button class="ghost-btn small delete-btn">Delete</button>
+        </div>
+      </div>
+    </li>
+  </template>
+
+  <footer class="app-footer">
+    <span>A sub-site of <a href="https://polimorph.dev" target="_blank" rel="noopener">polimorph.dev</a> • Client-side • If you clear your browser data, you'll lose your list unless you have it saved! (Use the "Export List" button)</span>
+    <p style="height: 0px; margin-top: 0;"></p>
+    <div class="particle-control"
+      <label for="particleCount">Particles:</label>
+      <input type="number" id="particleCount" value="3500" />
+    </div>
+    <p style="height: 0px; margin-top: 0;"></p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
