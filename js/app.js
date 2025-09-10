@@ -746,7 +746,7 @@ function init() {
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     const textureLoader = new THREE.TextureLoader();
-    const particleTexture = textureLoader.load('https://todo.polimorph.dev/circle.png');
+    const particleTexture = textureLoader.load('https://todo.polimorph.dev/img/circle.png');
 
     material = new THREE.PointsMaterial({
         map: particleTexture,
