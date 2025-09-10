@@ -377,7 +377,7 @@ function renderItem(task, isCompleted=false) {
   li.querySelector('.edit-btn').addEventListener('click', () => openEditor(task.id));
   li.querySelector('.duplicate-btn').addEventListener('click', () => duplicateTask(task.id));
   li.querySelector('.delete-btn').addEventListener('click', () => deleteTask(task.id));
-  checkbox.addEventListener('change', () => toggleComplete(task.id, checkbox.checked));
+  checkbox.addEventListener('change', () => {toggleComplete(task.id, checkbox.checked); updateProgress();});
 
   // Drag events
   li.addEventListener('dragstart', e => {
