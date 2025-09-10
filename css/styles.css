@@ -80,9 +80,10 @@ body {
   margin: 0;
   font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
   color: var(--text);
-  background: radial-gradient(1200px 600px at 10% -10%, #1f1140 0%, transparent 60%),
-              radial-gradient(1000px 600px at 120% 10%, #0a1a4a 0%, transparent 60%),
-              var(--bg);
+  background: var(--bg);
+  /* radial-gradient(1200px 600px at 10% -10%, #1f1140 0%, transparent 60%), */
+              /* radial-gradient(1000px 600px at 120% 10%, #0a1a4a 0%, transparent 60%), */
+              
 }
 
 header,
