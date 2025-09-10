@@ -193,9 +193,11 @@ function fileToDataURL(file) {
 function sanitize(str){ return (str || '').toString(); }
 
 function updateProgress() {
+  console.log('Updating progress bar...');
   const done = state.tasks.filter(t => t.done).length;
   const total = state.tasks.length;
   const percent = total > 0 ? (done / total) * 100 : 0;
+  console.log(`Progress: ${done}/${total} (${percent.toFixed(2)}%)`);
   document.getElementById("progressBar").style.width = percent + "%";
 }
 
