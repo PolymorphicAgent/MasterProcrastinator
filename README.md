@@ -9,6 +9,7 @@ A simple, client-side task manager with file attachments and drag-and-drop reord
 ## Features
 - Add, edit, and delete tasks
 - Attach files to tasks (images, documents, etc.)
+- Set due date for tasks
 - Drag-and-drop to reorder tasks
 - Mark tasks as completed and view them in a separate section
 - Search tasks by title or description
@@ -16,14 +17,25 @@ A simple, client-side task manager with file attachments and drag-and-drop reord
 - Import and export lists as JSON files for backup and/or transfer
 - Preference to toggle autosaving of attachments
 - Preference for light/dark mode
-- Progress bar to visualize task completion
 - Fully client-side, so your data never gets sent over the internet
 
 ## Usage
-Access the site ([https://todo.polimorph.dev](https://todo.polimorph.dev)). All data is stored locally in your browser.
+Access the site [https://todo.polimorph.dev](https://todo.polimorph.dev). All data is stored locally in your browser.
 
-- Click "Add Task" to create a new task. You can attach files if desired
+- Click `Add Task` to create a new task. You can attach files if desired
 
-- Click "Edit" on a task to edit it or change its attachments
+- Click `Edit` on a task to edit it
 
-- 
+- Click `Duplicate` on a task to create a copy of it
+
+- Click `Delete` on a task to remove it
+
+- Click the checkbox next to a task to mark it as completed. Completed tasks will move to the `Completed Tasks` section
+
+- Use the search bar to filter tasks
+
+## Easter Eggs
+- There are a couple...
+
+## Development
+- To open the project locally, clone the repository and open `index.html` in a web browser. For development, it's recommended to use a local server (e.g., using the Live Server extension in VSCode, or python `python3 -m http.server 8080`) to avoid CORS issues with IndexedDB.
