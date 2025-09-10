@@ -108,6 +108,8 @@ header,
   justify-content: space-between;
   padding: 14px 20px;
   z-index: 50;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .brand {
