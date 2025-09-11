@@ -897,14 +897,14 @@ function initParticles() {
 }
 
 function toggleParticles(on) {
+  scene.remove(particles);
+  geometry.dispose();
+  material.dispose();
+  cancelAnimationFrame(animate);
   if (on) {
     initParticles();
     // canvas.style.display = "block";
   } else {
-    scene.remove(particles);
-    geometry.dispose();
-    material.dispose();
-    cancelAnimationFrame(animate);
     // ctx && ctx.clearRect(0,0,canvas.width,canvas.height);
     // canvas.style.display = "none";
   }
