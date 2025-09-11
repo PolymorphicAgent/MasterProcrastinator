@@ -897,9 +897,12 @@ function initParticles() {
 }
 
 function toggleParticles(on) {
+  originalPositions = [];
+  ripples = [];
   scene.remove(particles);
   geometry.dispose();
   material.dispose();
+  particles.clear();
   cancelAnimationFrame(animate);
   if (on) {
     initParticles();
