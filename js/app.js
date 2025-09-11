@@ -93,6 +93,7 @@ function saveLocal() {
     localStorage.setItem('hw.tasks', JSON.stringify(smallTasks));
     localStorage.setItem('hw.sort', state.sort);
     localStorage.setItem('hw.autosaveAttachments', state.autosaveAttachments ? '1' : '0');
+    localStorage.setItem('hw.particles', state.particles ? '1' : '0');
   } catch (err) {
     console.error('saveLocal failed', err);
   }
@@ -112,8 +113,11 @@ async function loadLocal() {
 
   const as = localStorage.getItem('hw.autosaveAttachments');
   state.autosaveAttachments = as !== '0';
-
   document.getElementById("autosaveAttachmentsToggle").checked = state.autosaveAttachments;
+
+  const ps = localStorage.getItem('hw.particles');
+  state.particles = ps !== '0';
+  document.getElementById("particlesToggle").checked = state.particles;
 
   // Migrate any inlined attachments or iconDataURL to IndexedDB
   for (const task of state.tasks) {
