@@ -100,8 +100,8 @@ header,
 .app-header {
   position: sticky;
   top: 0;
-  backdrop-filter: saturate(140%) blur(8px);
-  background: color-mix(in oklab, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(140%) blur(4px);
+  background: color-mix(in oklab, var(--bg) 25%, transparent);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
