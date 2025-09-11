@@ -910,8 +910,7 @@ function toggleParticles(on) {
   renderer.dispose();
   document.body.removeChild(renderer.domElement);
   delete renderer;
-  THREE.clear();
-  THREE.dispose();
+//   THREE.dispose();
   
   if (on) {
     renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
