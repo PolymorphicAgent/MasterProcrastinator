@@ -907,7 +907,17 @@ function toggleParticles(on) {
   particles.position.set(0,0,0);
   cancelAnimationFrame(animate);
   renderer.clear();
+  renderer.dispose();
+  document.body.removeChild(renderer.domElement);
+  delete renderer;
+  THREE.clear();
+  THREE.dispose();
+  
   if (on) {
+    renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
     initParticles();
     // canvas.style.display = "block";
   } else {
