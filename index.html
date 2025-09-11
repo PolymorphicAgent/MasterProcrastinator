@@ -70,16 +70,16 @@
       </header>
 
       <div class="form-grid">
-        <label>
+        <div class="span-2">
           <input type="checkbox" id="autosaveAttachmentsToggle">Autosave attachments to IndexedDB (it is highly recommended to enable this)
-        </label>
-        <label>
-          <input type="checkbox" id="particlesToggle">Background particles
-        </label>
-        <div class="particle-control"
-          <label for="particleCount">Particles:</label>
-        <input type="number" id="particleCount" value="3500" />
         </div>
+        <div class="span-2">
+          <input type="checkbox" id="particlesToggle">Background particles
+          <div class="particle-control"
+            <label for="particleCount">Particles:</label>
+            <input type="number" id="particleCount" value="3500" />
+          </div>
+        </label>
       </div>
       <menu class="dialog-actions">
         <button class="primary-btn">Useless Button</button>
@@ -160,7 +160,6 @@
 
   <footer class="app-footer">
     <span>A sub-site of <a href="https://polimorph.dev" target="_blank" rel="noopener">polimorph.dev</a> • Client-side • If you clear your browser data, you'll lose your list unless you have it saved! (Use the "Export List" button)</span>
-    <p style="height: 0px; margin-top: 0;"></p>
     <p style="height: 0px; margin-top: 0;"></p>
   </footer>
 
