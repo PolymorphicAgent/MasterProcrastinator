@@ -906,6 +906,7 @@ function toggleParticles(on) {
   particles.rotation.set(0,0,0);
   particles.position.set(0,0,0);
   cancelAnimationFrame(animate);
+  renderer.clear();
   if (on) {
     initParticles();
     // canvas.style.display = "block";
