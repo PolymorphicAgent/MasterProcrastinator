@@ -933,6 +933,11 @@ function toggleParticles(on) {
     }
     // ctx && ctx.clearRect(0,0,canvas.width,canvas.height);
     // canvas.style.display = "none";
+    // Clear the last rendered frame from the canvas
+    renderer.clear();
+    renderer.renderLists.dispose(); // free GPU memory
+    renderer.setRenderTarget(null);
+    renderer.clearColor();
   }
 }
 
