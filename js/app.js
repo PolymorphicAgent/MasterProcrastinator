@@ -918,6 +918,7 @@ window.addEventListener('resize', () => {
 
 document.getElementById('particleCount').value = state.particlesCount;
 document.getElementById('particleCount').addEventListener('change', (e) => {
+    console.log("Change detected");
     const newCount = parseInt(e.target.value, 10);
     if (!isNaN(newCount)) {
         localStorage.setItem('hw.particlesCount', newCount);
