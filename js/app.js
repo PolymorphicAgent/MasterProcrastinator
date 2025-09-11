@@ -61,6 +61,15 @@ document.getElementById("autosaveAttachmentsToggle").onchange = e => {
 };
 document.getElementById("particlesToggle").onchange = e => {
   state.particles = e.target.checked;
+  // hide/show particle count input
+  let clst = document.getElementById("particleCount").classList;
+  if(state.particles){
+    if(clst.contains("hidden"))clst.remove("hidden");
+  }
+  else {
+    if(!clst.contains("hidden"))clst.add("hidden");
+  }
+
   toggleParticles(state.particles);
   saveLocal();
 };
