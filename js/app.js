@@ -922,6 +922,8 @@ document.getElementById('particleCount').addEventListener('change', (e) => {
     if (!isNaN(newCount)) {
         localStorage.setItem('hw.particlesCount', newCount);
         state.particlesCount = newCount;
+        toggleParticles(false);
+        toggleParticles(true);
         regenerateParticles();
     }
 });
