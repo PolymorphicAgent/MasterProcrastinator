@@ -129,6 +129,8 @@ async function loadLocal() {
   state.particles = ps !== '0';
   document.getElementById("particlesToggle").checked = state.particles;
 
+  document.getElementById("particleCount").value = state.particlesCount;
+
   // hide/show particle count input
   let clst = document.getElementById("particleCount").classList;
   if(state.particles){
