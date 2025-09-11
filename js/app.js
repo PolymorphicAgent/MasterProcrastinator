@@ -61,8 +61,8 @@ document.getElementById("autosaveAttachmentsToggle").onchange = e => {
 };
 document.getElementById("particlesToggle").onchange = e => {
   state.particles = e.target.checked;
+  toggleParticles(state.particles);
   saveLocal();
-  //TODO: enable/disable particles
 };
 
 // ---------- Theme ----------
@@ -706,7 +706,7 @@ els.importFile.addEventListener('change', async (e) => {
 
 // ---------- Keyboard shortcuts ----------
 window.addEventListener('keydown', (e) => {
-  if (e.key === 'n' && !els.itemDialog.open) { openEditor(); }
+  if (e.key === 'n' && !els.itemDialog.open && els.searchInput !== document.activeElement) { openEditor(); }
 });
 
 // ---------- Particle Driver ------------
