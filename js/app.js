@@ -750,7 +750,7 @@ let animationId = null;
 let geometry;
 let particles;
 let material;
-let particlesCount = parseInt(localStorage.getItem('hw.particlesCount')) || 3500;
+let particlesCount = state.particlesCount;
 
 function init() {
     // Create particles
@@ -916,7 +916,7 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-document.getElementById('particleCount').value = particlesCount;
+document.getElementById('particleCount').value = state.particlesCount;
 document.getElementById('particleCount').addEventListener('change', (e) => {
     const newCount = parseInt(e.target.value, 10);
     if (!isNaN(newCount)) {
