@@ -903,6 +903,8 @@ function toggleParticles(on) {
   geometry.dispose();
   material.dispose();
   particles.clear();
+  particles.rotation.set(0,0,0);
+  particles.position.set(0,0,0);
   cancelAnimationFrame(animate);
   if (on) {
     initParticles();
