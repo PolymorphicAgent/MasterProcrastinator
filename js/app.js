@@ -757,7 +757,7 @@ function init() {
         map: particleTexture,
         size: 1.5,
         transparent: true,
-        opacity: 0.12,
+        opacity: 0.3,
         depthWrite: false,
         blending: THREE.AdditiveBlending
     });
