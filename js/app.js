@@ -46,7 +46,7 @@ let state = {
   theme: 'dark',
   autosaveAttachments: Boolean(localStorage.getItem('hw.autosaveAttachments') !== '0'),
   particles: true,
-  particlesCount: localStorage.getItem("hw.particlesCount"),
+  particlesCount: parseInt(localStorage.getItem("hw.particlesCount")),
 };
 let editingId = null;
 
@@ -129,7 +129,7 @@ async function loadLocal() {
   state.particles = ps !== '0';
   document.getElementById("particlesToggle").checked = state.particles;
 
-  document.getElementById("particleCount").value = localStorage.getItem("hw.particlesCount")
+  document.getElementById("particleCount").value = parseInt(localStorage.getItem("hw.particlesCount"));
   // hide/show particle count input
   let clst = document.getElementById("particleCount").classList;
   if(state.particles){
