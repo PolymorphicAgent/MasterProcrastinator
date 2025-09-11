@@ -129,8 +129,7 @@ async function loadLocal() {
   state.particles = ps !== '0';
   document.getElementById("particlesToggle").checked = state.particles;
 
-  document.getElementById("particleCount").value = state.particlesCount;
-
+  document.getElementById("particleCount").value = localStorage.getItem("hw.particlesCount")
   // hide/show particle count input
   let clst = document.getElementById("particleCount").classList;
   if(state.particles){
@@ -751,7 +750,7 @@ let animationId = null;
 let geometry;
 let particles;
 let material;
-let particlesCount = parseInt(localStorage.getItem('particlesCount')) || 3500;
+let particlesCount = parseInt(localStorage.getItem('hw.particlesCount')) || 3500;
 
 function init() {
     // Create particles
