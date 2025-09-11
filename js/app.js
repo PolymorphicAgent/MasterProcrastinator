@@ -118,7 +118,6 @@ async function loadLocal() {
   const ps = localStorage.getItem('hw.particles');
   state.particles = ps !== '0';
   document.getElementById("particlesToggle").checked = state.particles;
-  toggleParticles(state.particles);
 
   // Migrate any inlined attachments or iconDataURL to IndexedDB
   for (const task of state.tasks) {
@@ -951,5 +950,5 @@ function toggleParticles(on) {
 //   console.log('Initializing app...');
   await loadLocal();
   render();
-  initParticles();
+  if(state.particles)initParticles();
 })();
