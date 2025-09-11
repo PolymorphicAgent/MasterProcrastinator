@@ -931,14 +931,7 @@ function initParticles() {
   animate();
 }
 
-function toggleParticles(on) {
-//   originalPositions = [];
-//   ripples = [];
-//   particles.rotation.set(0,0,0);
-//   particles.position.set(0,0,0);
-//   cancelAnimationFrame(animate);
-//   THREE.dispose();
-  
+function toggleParticles(on) {  
   if (on) {
     // Turn ON: clean, then start
     if (!particles) {
@@ -947,8 +940,6 @@ function toggleParticles(on) {
       init();
     }
     if (!animationId) animate();
-    // initParticles();
-    // canvas.style.display = "block";
   } else {
     // Turn OFF: stop animation and remove from scene
     if (animationId) {
@@ -965,9 +956,6 @@ function toggleParticles(on) {
       ripples = [];
       originalPositions = [];
     }
-    // ctx && ctx.clearRect(0,0,canvas.width,canvas.height);
-    // canvas.style.display = "none";
-    // Clear the last rendered frame from the canvas
     renderer.clear();
     renderer.renderLists.dispose(); // free GPU memory
     renderer.setRenderTarget(null);
