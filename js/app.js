@@ -713,6 +713,10 @@ window.addEventListener('keydown', (e) => {
 const canvas = document.getElementById('three-canvas');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+document.body.appendChild(renderer.domElement);
 
 let originalPositions = [];
 let ripples = [];
@@ -721,15 +725,9 @@ let targetColor = new THREE.Color(0.1, 0.1, 0.1); // dark base tone
 let geometry;
 let particles;
 let material;
-let renderer;
 let particlesCount = parseInt(localStorage.getItem('particlesCount')) || 3500;
 
 function init() {
-    renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    document.body.appendChild(renderer.domElement);
-
     // Create particles
     const positions = new Float32Array(particlesCount * 3);
     for (let i = 0; i < particlesCount * 3; i += 3) {
@@ -906,8 +904,6 @@ function toggleParticles(on) {
     scene.remove(particles);
     geometry.dispose();
     material.dispose();
-    renderer.dispose();
-    document.body.removeChild(renderer.domElement);
     cancelAnimationFrame(animate);
     // ctx && ctx.clearRect(0,0,canvas.width,canvas.height);
     // canvas.style.display = "none";
