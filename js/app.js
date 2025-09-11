@@ -128,6 +128,15 @@ async function loadLocal() {
   state.particles = ps !== '0';
   document.getElementById("particlesToggle").checked = state.particles;
 
+  // hide/show particle count input
+  let clst = document.getElementById("particleCount").classList;
+  if(state.particles){
+    if(clst.contains("hidden"))clst.remove("hidden");
+  }
+  else {
+    if(!clst.contains("hidden"))clst.add("hidden");
+  }
+
   // Migrate any inlined attachments or iconDataURL to IndexedDB
   for (const task of state.tasks) {
     // migrate iconDataURL -> iconId
