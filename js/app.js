@@ -761,8 +761,6 @@ function init() {
     scene.add(particles);
 }
 
-init();
-
 function regenerateParticles() {
   scene.remove(particles);
   geometry.dispose();
@@ -886,7 +884,6 @@ function animate() {
 
   renderer.render(scene, camera);
 }
-animate();
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -894,9 +891,15 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
+function initParticles() {
+  init();
+  animate();
+}
+
 // Initial functions
 (async function initApp(){
 //   console.log('Initializing app...');
   await loadLocal();
   render();
+  initParticles();
 })();
