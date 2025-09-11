@@ -750,12 +750,11 @@ let animationId = null;
 let geometry;
 let particles;
 let material;
-let particlesCount = state.particlesCount;
 
 function init() {
     // Create particles
-    const positions = new Float32Array(particlesCount * 3);
-    for (let i = 0; i < particlesCount * 3; i += 3) {
+    const positions = new Float32Array(state.particlesCount * 3);
+    for (let i = 0; i < state.particlesCount * 3; i += 3) {
         const x = (Math.random() - 0.5) * 150;
         const y = (Math.random() - 0.5) * 150;
         const z = (Math.random() - 0.5) * 200;
@@ -918,13 +917,11 @@ window.addEventListener('resize', () => {
 
 document.getElementById('particleCount').value = state.particlesCount;
 document.getElementById('particleCount').addEventListener('change', (e) => {
-    console.log("Change detected");
+    //console.log("Change detected");
     const newCount = parseInt(e.target.value, 10);
     if (!isNaN(newCount)) {
         localStorage.setItem('hw.particlesCount', newCount);
         state.particlesCount = newCount;
-        toggleParticles(false);
-        toggleParticles(true);
         regenerateParticles();
     }
 });
