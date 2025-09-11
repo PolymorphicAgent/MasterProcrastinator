@@ -896,6 +896,17 @@ function initParticles() {
   animate();
 }
 
+function toggleParticles(on) {
+  if (on) {
+    initParticles();
+    // canvas.style.display = "block";
+  } else {
+    cancelAnimationFrame(animId);
+    // ctx && ctx.clearRect(0,0,canvas.width,canvas.height);
+    // canvas.style.display = "none";
+  }
+}
+
 // Initial functions
 (async function initApp(){
 //   console.log('Initializing app...');
