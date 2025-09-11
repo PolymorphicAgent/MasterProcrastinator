@@ -772,30 +772,6 @@ function regenerateParticles() {
 
 camera.position.z = 50;
 
-// Mouse parallax
-let mouseX = 0, mouseY = 0;
-document.addEventListener('mousemove', (e) => {
-  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-  mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-});
-
-let scrollY = 0, lastScrollY = window.scrollY;
-window.addEventListener('scroll', () => {
-  scrollY = window.scrollY;
-});
-
-window.addEventListener('click', (e) => {
-  const x = (e.clientX / window.innerWidth - 0.5) * 2;
-  const y = (e.clientY / window.innerHeight - 0.5) * -2;
-
-  ripples.push({
-    x: x * 75,
-    y: y * 75,
-    radius: 0,
-    maxRadius: 80,
-  });
-});
-
 function repelParticles() {
     const positions = geometry.attributes.position.array;
     for (let i = 0; i < positions.length; i += 3) {
@@ -893,6 +869,31 @@ window.addEventListener('resize', () => {
 
 function initParticles() {
   init();
+
+  // Mouse parallax
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+  
+  let scrollY = 0, lastScrollY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    scrollY = window.scrollY;
+  });
+  
+  window.addEventListener('click', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * -2;
+  
+    ripples.push({
+      x: x * 75,
+      y: y * 75,
+      radius: 0,
+      maxRadius: 80,
+    });
+  });
+
   animate();
 }
 
