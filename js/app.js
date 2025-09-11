@@ -900,7 +900,6 @@ function initParticles() {
 function toggleParticles(on) {
 //   originalPositions = [];
 //   ripples = [];
-//   particles.clear();
 //   particles.rotation.set(0,0,0);
 //   particles.position.set(0,0,0);
 //   cancelAnimationFrame(animate);
@@ -928,8 +927,9 @@ function toggleParticles(on) {
       material.dispose();
       particles.geometry = null;
       particles.material = null;
-      particles.clear();
       particles = null;
+      ripples = [];
+      originalPositions = [];
     }
     // ctx && ctx.clearRect(0,0,canvas.width,canvas.height);
     // canvas.style.display = "none";
