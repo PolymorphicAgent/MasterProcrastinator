@@ -46,6 +46,7 @@ let state = {
   theme: 'dark',
   autosaveAttachments: Boolean(localStorage.getItem('hw.autosaveAttachments') !== '0'),
   particles: true,
+  particlesCount: localStorage.getItem("hw.particlesCount"),
 };
 let editingId = null;
 
@@ -912,6 +913,16 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+document.getElementById('particleCount').value = particlesCount;
+document.getElementById('particleCount').addEventListener('change', (e) => {
+    const newCount = parseInt(e.target.value, 10);
+    if (!isNaN(newCount)) {
+        localStorage.setItem('hw.particlesCount', newCount);
+        state.particlesCount = newCount;
+        regenerateParticles();
+    }
 });
 
 function initParticles() {
