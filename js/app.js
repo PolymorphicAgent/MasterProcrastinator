@@ -503,7 +503,7 @@ async function openEditor(id=null) {
       const card = document.createElement('div'); card.className = 'preview-card';
       const img = document.createElement('img');
       if ((rec.type || '').startsWith('image/')) img.src = URL.createObjectURL(rec.blob);
-      else img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg...>${a.name}</svg>`); // keep your previous fallback
+      else img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg...>${a.name}</svg>`); // keep previous fallback
       _objectURLs.add(img.src);
       const cap = document.createElement('div'); cap.textContent = a.name;
       card.append(img, cap); els.attachPreview.appendChild(card);
@@ -822,7 +822,6 @@ window.addEventListener('click', (e) => {
 });
 
 document.getElementById('particle-reset').addEventListener('click', (e) => {
-    console.log("resetting...");
     e.preventDefault();
     state.particlesCount=3500;
     document.getElementById('particleCount').value = 3500;
@@ -833,7 +832,6 @@ document.getElementById('particle-reset').addEventListener('click', (e) => {
 // fixes hitting reset on enter
 window.addEventListener("keypress", (e) => {
   if (e.key === "Enter" && (document.activeElement === document.getElementById('particleCount'))) {
-    console.log("enter detected");
     // Cancel the default action
     e.preventDefault();
     
