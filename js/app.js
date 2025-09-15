@@ -198,14 +198,14 @@ function formatDue(dueStr) {
   return `${nice} • in ${diffDays} days`;
 }
 
-function fileToDataURL(file) {
-  return new Promise((resolve, reject)=>{
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
+// function fileToDataURL(file) {
+//   return new Promise((resolve, reject)=>{
+//     const reader = new FileReader();
+//     reader.onload = () => resolve(reader.result);
+//     reader.onerror = reject;
+//     reader.readAsDataURL(file);
+//   });
+// }
 
 function sanitize(str){ return (str || '').toString(); }
 
@@ -373,12 +373,46 @@ function renderItem(task, isCompleted=false) {
     pill.className = 'attachment-pill';
     pill.download = a.name || 'file';
     pill.title = a.name || 'file';
+
+    const nameSpan = document.createElement('span');
+    nameSpan.textContent = a.name || 'file';
+    // nameSpan.download = a.name || 'file';
+
     // placeholder image for non-image types
     const img = document.createElement('img');
     img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><rect width="24" height="24" rx="4" fill="#6d28d9"/><path d="M7 8h10v8H7z" fill="white"/></svg>`);
-    const label = document.createElement('span');
-    label.textContent = a.name || 'file';
-    pill.append(img, label);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = '✕';
+    removeBtn.className = 'remove-attachment-btn';
+    removeBtn.title = 'Remove this file';
+    removeBtn.onclick = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        if (confirm('Remove this attachment?')) {
+        removeAttachment(task.id, a.id);
+        }
+    };
+
+    // preview/download link
+    const link = document.createElement('a');
+    // link.textContent = '📎';
+    link.title = 'Download';
+    link.style.marginRight = '6px';
+    link.onclick = async (e) => {
+        e.stopPropagation();
+        const rec = await getFileRecord(a.id);
+        if (rec?.blob) {
+        const url = URL.createObjectURL(rec.blob);
+        const temp = document.createElement('a');
+        temp.href = url;
+        temp.download = rec.name;
+        temp.click();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+        }
+    };
+
+    pill.append(img, nameSpan, removeBtn);
     attDiv.appendChild(pill);
 
     // fetch the blob and populate href + thumbnail if image
@@ -388,7 +422,7 @@ function renderItem(task, isCompleted=false) {
       _objectURLs.add(url);
       pill.href = url;
       if ((rec.type || '').startsWith('image/')) img.src = url;
-    }).catch(err => console.warn('attachment load failed', err));
+    }).catch(err => console.warn('attachment load failed:', err));
   }
 
   if (isCompleted) li.classList.add('completed');
@@ -512,9 +546,11 @@ els.itemForm.addEventListener('submit', async (e) => {
   // icon
   let iconId = null;
   if (els.iconInput.files && els.iconInput.files[0]) {
-    iconId = await putFileBlob(els.iconInput.files[0], els.iconInput.files[0].name, els.iconInput.files[0].type);
+      const file = els.iconInput.files[0];
+      iconId = await putFileBlob(file, file.name, file.type);
   } else if (editingId) {
-    iconId = state.tasks.find(t => t.id === editingId)?.iconId || null;
+      const existing = state.tasks.find(t => t.id === editingId);
+      iconId = existing?.iconId || null;
   }
 
   // attachments
@@ -533,7 +569,7 @@ els.itemForm.addEventListener('submit', async (e) => {
 
   if (editingId) {
     Object.assign(state.tasks.find(t => t.id === editingId), {
-      title, due, description, color, iconDataURL, attachments: newAtt
+      title, due, description, color, iconId, attachments: newAtt
     });
   } else {
     state.tasks.push({
@@ -548,6 +584,26 @@ els.itemForm.addEventListener('submit', async (e) => {
   els.itemDialog.close();
   render();
 });
+
+async function removeAttachment(taskId, fileId) {
+  const task = state.tasks.find(t => t.id === taskId);
+  if (!task) return;
+
+  // Remove from task
+  task.attachments = task.attachments.filter(a => a.id !== fileId);
+
+  // If no other task uses this file, delete from IndexedDB
+  const stillUsed = state.tasks.some(t =>
+    (t.iconId === fileId) ||
+    (t.attachments || []).some(a => a.id === fileId)
+  );
+  if (!stillUsed) {
+    await deleteFileById(fileId);
+  }
+
+  saveLocal();
+  render();
+}
 
 function deleteTask(id, prompt=true) {
   const i = state.tasks.findIndex(t => t.id === id);

@@ -352,6 +352,18 @@ button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 
 .item-actions { display: flex; gap: 8px; }
 
+.remove-attachment-btn {
+  border: none;
+  background: none;
+  color: #c00;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0 2px;
+}
+.remove-attachment-btn:hover {
+  color: #f44;
+}
+
 /* Dialog */
 dialog {
   border: 1px solid var(--border);
