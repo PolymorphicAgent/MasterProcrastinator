@@ -71,16 +71,18 @@
 
       <div class="form-grid">
         <p style="height: 0px; margin-top: 0;"></p>
-        <div class="span-2">
+        <div class="span-2 settings-item" >
           <input type="checkbox" id="autosaveAttachmentsToggle">Autosave attachments to IndexedDB (it is highly recommended to enable this)
         </div>
         <p style="height: 0px; margin-top: 0;"></p>
-        <div class="span-2">
-          <input type="checkbox" id="particlesToggle">Background particles</input>
+        <div class="span-2 settings-item">
+          <div class="settings-item">
+            <input type="checkbox" id="particlesToggle">Background particles</input>
+          </div>
           <p style="height: 0px; margin-top: 0;"></p>
-          <div id="particleOpts">Particles:&nbsp;
+          <div class="settings-item" id="particleOpts">Particles:&nbsp;
             <input type="number" id="particleCount" value="3500"></input>
-            <!-- <button>reset</button> -->
+            <button id="particle-reset">reset</button>
           </div>
         </div>
         <p style="height: 0px; margin-top: 0;"></p> 

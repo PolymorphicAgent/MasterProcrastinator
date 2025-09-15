@@ -46,7 +46,7 @@ let state = {
   theme: 'dark',
   autosaveAttachments: Boolean(localStorage.getItem('hw.autosaveAttachments') !== '0'),
   particles: true,
-  particlesCount: parseInt(localStorage.getItem("hw.particlesCount")),
+  particlesCount: parseInt(localStorage.getItem("hw.particlesCount")) || 3500,
 };
 let editingId = null;
 
@@ -129,7 +129,7 @@ async function loadLocal() {
   state.particles = ps !== '0';
   document.getElementById("particlesToggle").checked = state.particles;
 
-  document.getElementById("particleCount").value = parseInt(localStorage.getItem("hw.particlesCount"));
+  document.getElementById("particleCount").value = parseInt(localStorage.getItem("hw.particlesCount")) || 3500;
   // hide/show particle count input
   let clst = document.getElementById("particleOpts").classList;
   if(state.particles){
@@ -819,6 +819,27 @@ window.addEventListener('click', (e) => {
     radius: 0,
     maxRadius: 80,
   });
+});
+
+document.getElementById('particle-reset').addEventListener('click', (e) => {
+    console.log("resetting...");
+    e.preventDefault();
+    state.particlesCount=3500;
+    document.getElementById('particleCount').value = 3500;
+    localStorage.setItem('hw.particlesCount', 3500);
+    regenerateParticles();
+});
+
+// fixes hitting reset on enter
+window.addEventListener("keypress", (e) => {
+  if (e.key === "Enter" && (document.activeElement === document.getElementById('particleCount'))) {
+    console.log("enter detected");
+    // Cancel the default action
+    e.preventDefault();
+    
+    //unfocus the element
+    // document.getElementById('particleCount').blur();
+  }
 });
 
 function repelParticles() {
