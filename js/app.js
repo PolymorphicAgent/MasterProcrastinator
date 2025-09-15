@@ -63,7 +63,7 @@ document.getElementById("autosaveAttachmentsToggle").onchange = e => {
 document.getElementById("particlesToggle").onchange = e => {
   state.particles = e.target.checked;
   // hide/show particle count input
-  let clst = document.getElementById("particleCount").classList;
+  let clst = document.getElementById("particleOpts").classList;
   if(state.particles){
     if(clst.contains("hidden"))clst.remove("hidden");
   }
@@ -131,7 +131,7 @@ async function loadLocal() {
 
   document.getElementById("particleCount").value = parseInt(localStorage.getItem("hw.particlesCount"));
   // hide/show particle count input
-  let clst = document.getElementById("particleCount").classList;
+  let clst = document.getElementById("particleOpts").classList;
   if(state.particles){
     if(clst.contains("hidden"))clst.remove("hidden");
   }
@@ -770,7 +770,8 @@ function init() {
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     const textureLoader = new THREE.TextureLoader();
-    const particleTexture = textureLoader.load('https://todo.polimorph.dev/img/circle.png');
+    // textureLoader.setCrossOrigin('anonymous');
+    const particleTexture = textureLoader.load('img/circle.png');
 
     material = new THREE.PointsMaterial({
         map: particleTexture,

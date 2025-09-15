@@ -431,7 +431,7 @@ footer input[type="number"] {
 
 footer a { color: var(--primary-500); text-decoration: none; }
 
-footer .particle-control {
+.particle-control {
   display: flex;
   flex-direction: row;
   align-items: center;
