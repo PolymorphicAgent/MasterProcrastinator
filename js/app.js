@@ -75,19 +75,6 @@ document.getElementById("particlesToggle").onchange = e => {
   saveLocal();
 };
 
-// ---------- Theme ----------
-function applyTheme(t) {
-  document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
-  state.theme = t;
-  localStorage.setItem('hw.theme', t);
-}
-(function initTheme(){
-  const stored = localStorage.getItem('hw.theme');
-  applyTheme(stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
-})();
-els.themeToggle.addEventListener('click', () => applyTheme(state.theme === 'dark' ? 'light' : 'dark'));
-// window.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='t' && !els.itemDialog.open) els.themeToggle.click(); });
-
 // ---------- Persistence ----------
 function saveLocal() {
   try {
@@ -744,7 +731,12 @@ document.body.appendChild(renderer.domElement);
 
 let originalPositions = [];
 let ripples = [];
-let targetColor = new THREE.Color(0.1, 0.1, 0.1); // dark base tone
+const PARTICLE_COLORS = {
+  dark: { h: 220, s: 0.9, l: 0.1, opacity: 0.22 },
+  light: { h: 220, s: 1.3, l: 0.6, opacity: 0.72 },
+};
+
+let targetColor = new THREE.Color();
 
 let animationId = null;
 let geometry;
@@ -773,14 +765,17 @@ function init() {
     // textureLoader.setCrossOrigin('anonymous');
     const particleTexture = textureLoader.load('img/circle.png');
 
+    const p = PARTICLE_COLORS[state.theme];
+
     material = new THREE.PointsMaterial({
         map: particleTexture,
         size: 1.5,
         transparent: true,
-        opacity: 0.22,
+        opacity: p.opacity,
         depthWrite: false,
         blending: THREE.AdditiveBlending
     });
+    material.color.setHSL(p.h/360, p.s, p.l);
 
     particles = new THREE.Points(geometry, material);
     scene.add(particles);
@@ -921,9 +916,11 @@ function animate() {
   // Particle repulsion
   repelParticles();
 
-  // Gradually fade the material color back to base dark hue
-  targetColor.setHSL(hue / 360, 0.9, 0.1); // dark but tinted to hue
+  // Gradually fade the material color back to base hue
+  const base = PARTICLE_COLORS[state.theme];
+  targetColor.setHSL(hue / 360, base.s, base.l); // dark but tinted to hue
   material.color.lerp(targetColor, 0.05); // adjust 0.05 for slower or faster fade
+
 
 
   renderer.render(scene, camera);
@@ -982,6 +979,25 @@ function toggleParticles(on) {
     renderer.clearColor();
   }
 }
+
+// ---------- Theme ----------
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+  state.theme = t;
+  localStorage.setItem('hw.theme', t);
+  // Update particle colors to match new theme
+  if (material) {
+    const p = PARTICLE_COLORS[t];
+    material.color.setHSL(p.h/360, p.s, p.l);
+    material.opacity = p.opacity;
+  }
+}
+(function initTheme(){
+  const stored = localStorage.getItem('hw.theme');
+  applyTheme(stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+})();
+els.themeToggle.addEventListener('click', () => applyTheme(state.theme === 'dark' ? 'light' : 'dark'));
+// window.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='t' && !els.itemDialog.open) els.themeToggle.click(); });
 
 // Initial functions
 (async function initApp(){
