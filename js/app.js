@@ -723,7 +723,7 @@ window.addEventListener('keydown', (e) => {
 // ---------- Particle Driver ------------
 const canvas = document.getElementById('three-canvas');
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 10, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -770,6 +770,7 @@ function init() {
     material = new THREE.PointsMaterial({
         map: particleTexture,
         size: 1.5,
+        sizeAttenuation: true, // <— makes size shrink/grow smoothly with distance
         transparent: true,
         opacity: p.opacity,
         depthWrite: false,
