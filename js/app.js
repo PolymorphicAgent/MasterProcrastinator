@@ -1033,6 +1033,10 @@ function animate() {
   particles.rotation.y += 0.0008;
   particles.rotation.x += 0.0005;
 
+  // apply decay when mouse hasn't moved
+  mouseX *= 0.98;
+  mouseY *= 0.98;
+
   particles.position.x += (mouseX * 0.5 - particles.position.x) * 0.02;
   particles.position.y += (-mouseY * 0.5 - particles.position.y + scrollDiff * 0.5) * 0.02;
 
