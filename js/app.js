@@ -37,6 +37,7 @@ const els = {
   filesInput: document.getElementById('filesInput'),
   attachPreview: document.getElementById('attachmentPreview'),
   saveItemBtn: document.getElementById('saveItemBtn'),
+  cancelItemBtn: document.getElementById('cancelItemBtn'),
   template: document.getElementById('itemTemplate'),
 };
 
@@ -585,8 +586,19 @@ async function openEditor(id=null) {
 els.newItemBtn.addEventListener('click', () => openEditor());
 els.closeDialogBtn.addEventListener('click', () => els.itemDialog.close());
 
+els.cancelItemBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  // User clicked Cancel, just close without saving
+  els.itemDialog.close();
+  editingId = null;
+});
+
 els.itemForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  if (els.itemDialog.returnValue === 'cancel') {
+    itemDialog.close();
+    return;
+  }
   const title = els.titleInput.value.trim();
   if (!title) return;
   const due = els.dueInput.value || '';
