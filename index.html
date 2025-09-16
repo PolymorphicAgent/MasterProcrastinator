@@ -9,7 +9,7 @@
   <link rel="icon" href="img/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="if(!localStorage.noFirstVisit){showReadme();localStorage.noFirstVisit=true;}">
   <canvas id="three-canvas"></canvas>
   <header class="app-header">
     <div class="brand center-screen">
@@ -85,10 +85,13 @@
             <button id="particle-reset">reset</button>
           </div>
         </div>
-        <p style="height: 0px; margin-top: 0;"></p> 
+        <p style="height: 0px; margin-top: 0;"></p>
+        <div class="span-2 settings-item" style="display: flex; align-items: center; flex-direction: column;">
+          <button id="settingsInfo">ℹ️ About&nbsp;</button>
+        </div>
       </div>
       <menu class="dialog-actions">
-        <button class="primary-btn">Useless Button</button>
+        <button class="primary-btn">Close</button>
       </menu>
     </form>
   </dialog>

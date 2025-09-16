@@ -74,6 +74,9 @@ document.getElementById("particlesToggle").onchange = e => {
   toggleParticles(state.particles);
   saveLocal();
 };
+document.getElementById("settingsInfo").onclick = e => {
+    showReadme();
+};
 
 // ---------- Persistence ----------
 function saveLocal() {
