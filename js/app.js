@@ -198,14 +198,46 @@ function formatDue(dueStr) {
   return `${nice} • in ${diffDays} days`;
 }
 
-// function fileToDataURL(file) {
-//   return new Promise((resolve, reject)=>{
-//     const reader = new FileReader();
-//     reader.onload = () => resolve(reader.result);
-//     reader.onerror = reject;
-//     reader.readAsDataURL(file);
-//   });
-// }
+function ensurePathLength(inpString, length){
+    if(inpString.length > length){
+        // get the difference in length
+        let diff = inpString.length-length;
+
+        // remove diff characters after the fifth character of prefix
+        return inpString.substring(0, 6) + "..." + inpString.substring(6+diff+3);
+    }
+    else return inpString;
+}
+
+function simpleMarkdown(md) {
+  return md
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+    .replace(/\*\*(.*?)\*\*/gim, '<b>$1</b>')
+    .replace(/\*(.*?)\*/gim, '<i>$1</i>')
+    .replace(/`([^`]+)`/gim, '<code>$1</code>')
+    .replace(/\n$/gim, '<br>')
+    .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank">$1</a>');
+}
+
+async function showReadme() {
+  const modal = document.getElementById('readmeModal');
+  const content = document.getElementById('readmeContent');
+  content.innerHTML = 'Loading…';
+
+  try {
+    const resp = await fetch('/README.md');
+    if (!resp.ok) throw new Error('README not found');
+    const text = await resp.text();
+    content.innerHTML = simpleMarkdown(text);
+  } catch (err) {
+    content.innerHTML = `<p style="color:red">Error loading README: ${err.message}</p>`;
+  }
+
+  modal.classList.remove('hidden');
+}
 
 function sanitize(str){ return (str || '').toString(); }
 
@@ -375,7 +407,7 @@ function renderItem(task, isCompleted=false) {
     pill.title = a.name || 'file';
 
     const nameSpan = document.createElement('span');
-    nameSpan.textContent = a.name || 'file';
+    nameSpan.textContent = ensurePathLength(a.name, 35) || 'file';
     // nameSpan.download = a.name || 'file';
 
     // placeholder image for non-image types
@@ -521,13 +553,27 @@ async function openEditor(id=null) {
   for (const a of task?.attachments || []) {
     const rec = await getFileRecord(a.id);
     if (rec) {
-      const card = document.createElement('div'); card.className = 'preview-card';
+      const card = document.createElement('div');
+      card.className = 'preview-card';
       const img = document.createElement('img');
       if ((rec.type || '').startsWith('image/')) img.src = URL.createObjectURL(rec.blob);
-      else img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg...>${a.name}</svg>`); // keep previous fallback
+      // keep previous fallback
+      else img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><rect width="24" height="24" rx="4" fill="#6d28d9"/><path d="M7 8h10v8H7z" fill="white"/></svg>`);
       _objectURLs.add(img.src);
-      const cap = document.createElement('div'); cap.textContent = a.name;
-      card.append(img, cap); els.attachPreview.appendChild(card);
+      const cap = document.createElement('div'); cap.textContent = ensurePathLength(a.name, 24);
+      const removeBtn = document.createElement('button');
+      removeBtn.textContent = '✕';
+      removeBtn.className = 'remove-attachment-btn';
+      removeBtn.title = 'Remove this file';
+      removeBtn.onclick = async (e) => {
+        e.stopPropagation();
+        if (confirm('Remove this attachment?')) {
+          await removeAttachment(task.id, a.id);
+          // re-open editor to refresh preview
+          await openEditor(task.id);
+        }
+      };
+      card.append(img, cap, removeBtn); els.attachPreview.appendChild(card);
     }
   }
   els.itemDialog.showModal();
@@ -721,6 +767,10 @@ els.exportBtn.addEventListener('click', () => {
 els.importBtn.addEventListener('click', () => {
   els.importFile.click();
 });
+
+document.getElementById('closeReadmeBtn').onclick = () => {
+  document.getElementById('readmeModal').classList.add('hidden');
+};
 
 els.importFile.addEventListener('change', async (e) => {
   if(state.tasks.length !== 0){
