@@ -400,7 +400,10 @@ function renderItem(task, isCompleted=false) {
   li.querySelector('.title').textContent = task.title || '(Untitled)';
   const dueEl = li.querySelector('.due');
   dueEl.textContent = formatDue(task.due);
-  li.querySelector('.desc').textContent = task.description || '';
+  li.querySelector('.desc').innerHTML =
+  (task.description || '')
+    .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+
 
   // Attachments
   const attDiv = li.querySelector('.attachments');
