@@ -401,7 +401,7 @@ function renderItem(task, isCompleted=false) {
   const dueEl = li.querySelector('.due');
   dueEl.textContent = formatDue(task.due);
   li.querySelector('.desc').innerHTML =
-  (task.description || '')
+  (simpleMarkdown(task.description) || '')
     .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
 
 
@@ -1131,7 +1131,6 @@ els.themeToggle.addEventListener('click', () => applyTheme(state.theme === 'dark
 
 // Initial functions
 (async function initApp(){
-//   console.log('Initializing app...');
   await loadLocal();
   render();
   if(state.particles)initParticles();
