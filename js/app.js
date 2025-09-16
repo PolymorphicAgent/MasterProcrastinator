@@ -236,7 +236,7 @@ async function showReadme() {
     content.innerHTML = `<p style="color:red">Error loading README: ${err.message}</p>`;
   }
 
-  modal.classList.remove('hidden');
+  modal.showModal();
 }
 
 function sanitize(str){ return (str || '').toString(); }
@@ -769,7 +769,7 @@ els.importBtn.addEventListener('click', () => {
 });
 
 document.getElementById('closeReadmeBtn').onclick = () => {
-  document.getElementById('readmeModal').classList.add('hidden');
+  document.getElementById('readmeModal').close();
 };
 
 els.importFile.addEventListener('change', async (e) => {
