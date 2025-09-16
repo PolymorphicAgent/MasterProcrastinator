@@ -221,6 +221,7 @@ function simpleMarkdown(md) {
     .replace(/\*\*(.*?)\*\*/gim, '<b>$1</b>')
     .replace(/\*(.*?)\*/gim, '<i>$1</i>')
     .replace(/`([^`]+)`/gim, '<code>$1</code>')
+    .replace(/^\s*[-*] (.*$)/gim, '<ul><li>$1</li></ul>')
     .replace(/\n$/gim, '<br>')
     .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank">$1</a>');
 }
