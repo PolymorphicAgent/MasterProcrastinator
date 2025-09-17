@@ -393,7 +393,7 @@ function renderItem(task, isCompleted=false) {
       iconEl.alt = rec.name || '';
     }).catch(err => console.warn('icon load failed', err));
   } else {
-    iconEl.src = 'img/1920.png';
+    iconEl.src = 'img/placeholder.png';
     iconEl.style.display = 'block';
   }
 
