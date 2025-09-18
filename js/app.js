@@ -637,7 +637,7 @@ els.itemForm.addEventListener('submit', async (e) => {
       title, due, description, color, iconId, attachments: newAtt
     });
   } else {
-    state.tasks.push({
+    state.tasks.unshift({
       id: uid(),
       title, due, description, color,
       iconId: iconId || null,
