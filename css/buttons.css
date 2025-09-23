@@ -1,0 +1,38 @@
+/* Buttons */
+button, .file-label > span {
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface) 70%, var(--primary) 30%);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform .06s ease, box-shadow .2s, background .2s, border-color .2s;
+  box-shadow: var(--card-shadow);
+}
+
+button:active { transform: translateY(1px); }
+button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  padding: 8px 12px;
+  border-color: transparent;
+}
+.secondary-btn {
+  background: color-mix(in oklab, var(--surface) 70%, var(--primary) 30%);
+}
+.ghost-btn {
+  background: transparent;
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+/* Buttons in light mode */
+:root[data-theme="light"] button {
+  background-color: var(--primary);
+  color: var(--bg);
+}
+:root[data-theme="light"] button.secondary {
+  background-color: var(--surface-2);
+  color: var(--text);
+}

@@ -1,0 +1,22 @@
+.form-grid .controls {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    align-items: start;
+}
+
+/* fixed-size SVG canvas using a viewBox for simple math */
+.form-grid .picker {
+    width: 100px;
+    height: 100px;
+}
+
+#svg {
+    width: 100px;
+    height: 100px;
+    user-select: none;
+    touch-action: none; /* allow pointer handling */
+    display: block;
+}
+
+

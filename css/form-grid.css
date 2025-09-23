@@ -1,0 +1,70 @@
+.form-grid {
+  display: grid; gap: 14px; padding: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+.form-grid label { display: grid; gap: 6px; }
+.form-grid input[type="text"],
+.form-grid input[type="date"],
+.form-grid input[type="color"],
+.form-grid textarea {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+.form-grid .section {
+  background: var(--surface-2);
+  box-shadow: var(--card-shadow);
+  padding: 6px 0;
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.form-grid .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    margin-bottom: 0.6rem;
+}
+
+.form-grid .section-header h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.5rem;
+}
+
+.form-grid .section-header .hint {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.form-grid .label-text {
+    white-space:nowrap;
+}
+
+/* editor grid */
+.form-grid .editor-grid {
+  display: grid; gap: 14px; padding: 16px;
+  grid-template-columns: repeat(3, 1fr);
+
+  margin-bottom: 14px;
+}
+
+.form-grid .field {
+  font-size: .95rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text);
+  background: var(--bg);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem;
+}
+
+.span-2 { grid-column: span 2; }

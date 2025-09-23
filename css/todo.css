@@ -1,0 +1,75 @@
+/* Todo list */
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 14px;
+  min-height: 120px;
+}
+.todo-list.completed .todo-item { opacity: .8; }
+
+.todo-item {
+  display: grid;
+  grid-template-columns: 6px 24px 24px 48px 1fr;
+  align-items: center;
+  gap: 12px;
+  background: color-mix(in oklab, var(--surface) 85%, #000 15%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 10px 12px;
+  margin: 10px 0;
+  box-shadow: var(--card-shadow);
+}
+
+.todo-item.dragging {
+  opacity: 0.75;
+  outline: 2px dashed var(--primary-500);
+}
+.color-strip {
+  width: 6px; height: 100%;
+  border-radius: 12px;
+  background: var(--primary);
+}
+.drag-handle { cursor: grab; user-select: none; text-align: center; opacity: .8; }
+.drag-handle:active { cursor: grabbing; }
+.check { width: 20px; height: 20px; }
+.icon {
+  width: 44px; height: 44px; object-fit: cover; border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface-2) 70%, transparent);
+  display: none;
+}
+
+.content { display: grid; gap: 8px; }
+.content .row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+}
+.title { margin: 0; font-size: 16px; }
+.due { font-size: 13px; color: var(--muted); }
+.desc { margin: 0; color: var(--muted); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 15px;}
+
+.attachments { display: flex; flex-wrap: wrap; gap: 8px; }
+.attachment-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px dashed var(--border); border-radius: 12px; padding: 6px 8px;
+  font-size: 12px; background: color-mix(in oklab, var(--surface) 85%, transparent);
+  color: var(--link);
+}
+.attachment-pill img { width: 18px; height: 18px; object-fit: cover; border-radius: 4px; }
+
+.item-actions { display: flex; gap: 8px; }
+
+.remove-attachment-btn {
+  border: none;
+  background: none;
+  color: #c00;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0 2px;
+}
+.remove-attachment-btn:hover {
+  color: #f44;
+}
+
+/* Completed styles */
+.todo-item.completed .title { text-decoration: line-through; opacity: .8; }
+.todo-item.completed .desc { opacity: .7; }

@@ -1,0 +1,63 @@
+#readmeModal .modal-content.readme {
+  max-width: 700px;
+  max-height: 80vh;
+  /* overflow-y: auto; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+#readmeModal .modal-header {
+  background-color: var(--surface);
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+
+#closeReadmeBtn {
+  color: var(--text);
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#closeReadmeBtn:hover {
+    background: var(--ring)
+}
+
+/* Markdown */
+.markdown-body {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+code {
+    color: var(--primary);
+    background-color: var(--bg) !important;
+    box-shadow: var(--card-shadow);
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+  margin-top: 0.3em;
+}
+
+.markdown-body pre {
+  background: var(--bg, #f0f0f0);
+  padding: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.markdown-body code {
+  font-family: monospace;
+  background: var(--bg, #eee);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
