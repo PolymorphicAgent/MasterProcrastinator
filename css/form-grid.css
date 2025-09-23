@@ -4,6 +4,7 @@
 }
 .form-grid label { display: grid; gap: 6px; }
 .form-grid input[type="text"],
+.form-grid input[type="number"],
 .form-grid input[type="date"],
 .form-grid input[type="color"],
 .form-grid textarea {
@@ -34,6 +35,12 @@
 .form-grid .section-header h3 {
   margin: 0 0 4px 0;
   font-size: 1.5rem;
+}
+
+.form-grid .section-header h5 {
+  margin: 0 0 4px 0;
+  font-size: 1.5rem;
+  color: var(--accent);
 }
 
 .form-grid .section-header .hint {

@@ -5,7 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Master Procrastinator</title>
   <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/todo.css"/>
+  <link rel="stylesheet" href="css/dialog.css"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="css/buttons.css"/>
+  <link rel="stylesheet" href="css/form-grid.css"/>
+  <link rel="stylesheet" href="css/readmeModal.css"/>
+  <link rel="stylesheet" href="css/progress-bar.css"/>
+  <link rel="stylesheet" href="css/animatedTitle.css"/>
+  <link rel="stylesheet" href="css/shadowPicker.css" />
+  <link rel="stylesheet" href="css/backgroundCanvas.css"/>
   <link rel="icon" href="img/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -65,26 +74,187 @@
   <dialog id="settingsModal">
     <form method="dialog" id="settingsItemForm">
       <header class="dialog-header">
-        <h3 id="dialogTitle">Settings</h3>
+        <h3>Settings</h3>
         <button type="button" class="ghost-btn close-btn" id="closeSettingsBtn" aria-label="Close">✕</button>
       </header>
 
       <div class="form-grid">
-        <p style="height: 0px; margin-top: 0;"></p>
-        <div class="span-2 settings-item" >
-          <input type="checkbox" id="autosaveAttachmentsToggle">Autosave attachments to IndexedDB (it is highly recommended to enable this)
+        <div class="span-2 section-header">
+            <h5>Functional</h5>
         </div>
-        <p style="height: 0px; margin-top: 0;"></p>
-        <div class="span-2 settings-item">
-          <div class="settings-item">
-            <input type="checkbox" id="particlesToggle">Background particles</input>
+        <label class="span-2 field" >
+          <span class="label-text">Autosave attachments to IndexedDB (it is highly recommended to enable this)</span>
+          <input type="checkbox" id="autosaveAttachmentsToggle">
+        </label>
+        <div class="span-2 section-header">
+            <p></p>
+            <h5>Cosmetic</h5>
+        </div>
+        <section class="span-2 section">
+          <div class="section-header">
+            <h3>Particle Settings</h3>
           </div>
-          <p style="height: 0px; margin-top: 0;"></p>
-          <div class="settings-item" id="particleOpts">Particles:&nbsp;
-            <input type="number" id="particleCount" value="3500"></input>
-            <button id="particle-reset">reset</button>
+          <section style="display: grid;gap: 14px; padding: 16px;grid-template-columns: repeat(2,1fr);">
+            <div class="field" style="display: flex;flex-direction: column;align-items: center;">
+              <span class="label-text">Background Particles</span>
+              <p style="height: 0px; margin-top: 0;margin-bottom: 0.6rem;padding: 0px 0px;"></p>
+              <input type="checkbox" id="particlesToggle">
+            </div>
+            <div class="field" id="particleOpts">
+              <span class="label-text">Particle Amount</span>
+              <input type="number" id="particleCount" value="3500"></input>
+              <button id="particle-reset">reset</button>
+            </div>
+          </section>
+        </section>
+        <!-- <p style="height: 0px; margin-top: 0;margin-bottom: 0;padding: 0px 0px;"></p> -->
+
+
+
+        <!-- Preset themes section -->
+        <div class="span-2 section">
+          <div class="section-header">
+            <h3>Preset themes</h3>
+            <small class="hint">Choose a theme tile to change the appearance of the app!</small>
+          </div>
+          <div id="theme-presets" class="presets-grid" aria-label="Theme presets">
+            <!-- Preset theme tiles rendered by app.js -->
           </div>
         </div>
+        <!-- Theme editor (create / edit custom themes) -->
+        <section class="span-2 section">
+          <div class="section-header">
+            <h3>Theme editor</h3>
+            <small class="hint">Create a custom theme and save/export it. Preview updates live!</small>
+          </div>
+    
+          <form id="theme-editor" autocomplete="off">
+            <div class="editor-grid">
+              <!-- CSS variables we allow the user to edit -->
+              <label class="field" title="Defines the background color" style="background: var(--bg);">
+                <span class="label-text">Background</span>
+                <input type="color" data-var="--bg" value="#0b1220">
+<!-- TODO: make the values grab their color from the currently applied theme! -->
+              </label>
+    
+              <label class="field" title="Defines the color of most text on the page" style="background: var(--text);color: var(--bg);">
+                <span class="label-text">Text</span>
+                <input type="color" data-var="--text" value="#e6eef8">
+              </label>
+
+              <label class="field" title="Defines the color of Surfaces (i.e. cards, UI elements, etc.)"  style="background: var(--surface);">
+                <span class="label-text">Surfaces</span>
+                <input type="color" data-var="--surface" value="#e6eef8">
+              </label>
+
+              <label class="field" title="Defines the color of secondary surfaces (i.e. UI sub-elements, etc.)" style="background: var(--surface-2);">
+                <span class="label-text">Secondary Surfaces</span>
+                <input type="color" data-var="--surface-2" value="#e6eef8">
+              </label>
+              
+              <label class="field" title="Defines the color of hyperlinks" style="background: var(--link);">
+                <span class="label-text">Links</span>
+                <input type="color" data-var="--link" value="#e6eef8">
+              </label>
+
+              <label class="field" title="Defines the color of description text and other minor elements" style="background: var(--muted);">
+                <span class="label-text">Muted</span>
+                <input type="color" data-var="--muted" value="#e6eef8">
+              </label>
+
+              <label class="field" title="Defines the primary color throughout the application" style="background: var(--primary);">
+                <span class="label-text">Primary</span>
+                <input type="color" data-var="--primary" value="#e6eef8">
+              </label>
+
+              <label class="field" title="Usually a little whiter than the Primary color" style="background: var(--primary-500);">
+                <span class="label-text">Primary (500)</span>
+                <input type="color" data-var="--primary-500" value="#e6eef8">
+              </label>
+
+              <label class="field" title="Defines the accent color" style="background: var(--accent);">
+                <span class="label-text">Accent</span>
+                <input type="color" data-var="--accent" value="#6ee7b7">
+              </label>
+
+              <label class="field" title="Defines the focus outline color" style="background: var(--ring);">
+                <span class="label-text">Ring</span>
+                <input type="color" data-var="--ring" value="#6ee7b7">
+              </label>
+
+              <label class="field" title="Defines the card border color (and is used for some UI elements)" style="background: var(--border);">
+                <span class="label-text">Border</span>
+                <input type="color" data-var="--border" value="#6ee7b7">
+              </label>
+    
+              <label class="field" title="Defines the lower bound for the particle color cycle">
+                <span class="label-text">Particle Low</span>
+                <input type="color" data-var="--particle-low" value="#a78bfa">
+              </label>
+    
+              <label class="field" title="Defines the upped bound for the particle color cycle">
+                <span class="label-text">Particle High</span>
+                <input type="color" data-var="--particle-high" value="#60a5fa">
+              </label>
+
+              <label class="field" title="Defines shadow direction and magnitude">
+                <span class="label-text">Shadow Direction</span>
+                <div>
+                    <!-- SVG picker -->
+                    <div class="picker">
+                        <svg id="svg" viewBox="0 0 200 200" aria-label="Shadow direction picker">
+                            <defs>
+                            <!-- arrowhead marker (orient="auto" so it rotates with the line) -->
+                            <marker id="arrowMarker" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+                                <path id="markerPath" d="M0,0 L10,5 L0,10 z" fill="var(--primary)"></path>
+                            </marker>
+                            </defs>
+
+                            <!-- circular boundary -->
+                            <circle cx="100" cy="100" r="96" fill="var(--surface)" stroke="var(--border)" stroke-width="2" />
+
+                            <!-- center dot -->
+                            <circle id="centerDot" cx="100" cy="100" r="3" fill="var(--primary)" />
+
+                            <!-- shaft line center -> edge with arrowhead marker -->
+                            <line id="shaft" x1="100" y1="100" x2="190" y2="100" stroke="var(--primary)" stroke-width="2" marker-end="url(#arrowMarker)" stroke-linecap="round" />
+
+                            <!-- draggable dot (smaller) -->
+                            <circle id="dragDot" cx="100" cy="120" r="10" fill="var(--accent)" cursor="grab" />
+                        </svg>
+                    </div>
+                </div>
+              </label>
+
+              <label class="field" title="Defines the color of shadows" style="background: var(--card-shadow);">
+                <span class="label-text">Shadow color</span>
+                <input id="shadowPicker" type="color" value="#000000">
+              </label>
+
+            </div>
+    
+            <div>
+              <div class="editor-controls">
+                <input id="theme-name" type="text" placeholder="Custom Theme Name" style="width: 75%;align-self: center;"/>
+                <div class="button-row">
+                  <button id="save-theme" type="button" class="btn">Save Theme to Browser</button>
+                  <button id="delete-theme" type="button" class="btn ghost">Reset Selection to Current Theme</button>
+                </div>
+    
+                <div class="import-export">
+                  <label class="file-label">
+                    <input type="file" id="import-theme" accept=".json" />
+                    <button id="import-theme-btn" type="button" class="primary-btn">Import Theme From File</button>
+                  </label>
+                  <button id="export-theme" type="button" class="primary-btn">Export Theme to File</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </section>
+
+
+
         <p style="height: 0px; margin-top: 0;"></p>
         <div class="span-2 settings-item" style="display: flex; align-items: center; flex-direction: column;">
           <button id="settingsInfo">ℹ️ About&nbsp;</button>
@@ -187,5 +357,6 @@
   </footer>
 
   <script src="js/app.js"></script>
+  <script src="js/shadowPicker.js"></script>
 </body>
 </html>
