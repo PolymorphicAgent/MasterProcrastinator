@@ -65,11 +65,17 @@ document.getElementById("particlesToggle").onchange = e => {
   state.particles = e.target.checked;
   // hide/show particle count input
   let clst = document.getElementById("particleOpts").classList;
+  let chclst = document.getElementById("particleToggleField").classList;
+  let spacer = document.getElementById("particleSpacer").classList;
   if(state.particles){
     if(clst.contains("hidden"))clst.remove("hidden");
+    if(chclst.contains("span-2"))chclst.remove("span-2");
+    if(spacer.contains("hidden"))spacer.remove("hidden");
   }
   else {
     if(!clst.contains("hidden"))clst.add("hidden");
+    if(!chclst.contains("span-2"))chclst.add("span-2");
+    if(!spacer.contains("hidden"))spacer.add("hidden");
   }
 
   toggleParticles(state.particles);

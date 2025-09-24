@@ -314,3 +314,6 @@ footer a { color: var(--primary-500); text-decoration: none; }
 @media (max-width:800px) {
   .preview-box { flex-direction:column; align-items:stretch; }
 }
+
+/* Helpful utility classes */
+.hidden { display: none !important; }

@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/dialog.css"/>
   <link rel="stylesheet" href="css/styles.css"/>
   <link rel="stylesheet" href="css/buttons.css"/>
+  <link rel="stylesheet" href="css/checkBox.css"/>
   <link rel="stylesheet" href="css/form-grid.css"/>
   <link rel="stylesheet" href="css/readmeModal.css"/>
   <link rel="stylesheet" href="css/progress-bar.css"/>
@@ -84,7 +85,11 @@
         </div>
         <label class="span-2 field" >
           <span class="label-text">Autosave attachments to IndexedDB (it is highly recommended to enable this)</span>
-          <input type="checkbox" id="autosaveAttachmentsToggle">
+          <p style="height: 0px; margin-top: 0;margin-bottom: 0.6rem;padding: 0px 0px;"></p>
+          <label class="styled-checkbox">
+                <input id="autosaveAttachmentsToggle" type="checkbox">
+                <span class="box" aria-hidden="true"></span>
+              </label>
         </label>
         <div class="span-2 section-header">
             <p></p>
@@ -95,10 +100,13 @@
             <h3>Particle Settings</h3>
           </div>
           <section style="display: grid;gap: 14px; padding: 16px;grid-template-columns: repeat(2,1fr);">
-            <div class="field" style="display: flex;flex-direction: column;align-items: center;">
+            <div class="field" style="display: flex;flex-direction: column;align-items: center;" id="particleToggleField">
               <span class="label-text">Background Particles</span>
-              <p style="height: 0px; margin-top: 0;margin-bottom: 0.6rem;padding: 0px 0px;"></p>
-              <input type="checkbox" id="particlesToggle">
+              <p id="particleSpacer" style="height: 0px; margin-top: 0;margin-bottom: 0.6rem;padding: 0px 0px;"></p>
+              <label class="styled-checkbox">
+                <input id="particlesToggle" type="checkbox">
+                <span class="box" aria-hidden="true"></span>
+              </label>
             </div>
             <div class="field" id="particleOpts">
               <span class="label-text">Particle Amount</span>
@@ -252,8 +260,6 @@
             </div>
           </form>
         </section>
-
-
 
         <p style="height: 0px; margin-top: 0;"></p>
         <div class="span-2 settings-item" style="display: flex; align-items: center; flex-direction: column;">
