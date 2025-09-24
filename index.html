@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/form-grid.css"/>
   <link rel="stylesheet" href="css/readmeModal.css"/>
   <link rel="stylesheet" href="css/progress-bar.css"/>
+  <link rel="stylesheet" href="css/styledSlider.css"/>
   <link rel="stylesheet" href="css/animatedTitle.css"/>
   <link rel="stylesheet" href="css/shadowPicker.css" />
   <link rel="stylesheet" href="css/backgroundCanvas.css"/>
@@ -120,6 +121,7 @@
 
 
         <!-- Preset themes section -->
+        <p class="span-2 hint" style="text-align: center;">WARNING! EXPERIMENTAL FEATURES BELOW NOT FULLY IMPLEMENTED. UNDER CONSTRUCTION!</p>
         <div class="span-2 section">
           <div class="section-header">
             <h3>Preset themes</h3>
@@ -195,14 +197,23 @@
                 <input type="color" data-var="--border" value="#6ee7b7">
               </label>
     
-              <label class="field" title="Defines the lower bound for the particle color cycle">
-                <span class="label-text">Particle Low</span>
-                <input type="color" data-var="--particle-low" value="#a78bfa">
+              <label class="field" title="Defines the starting color for the particle color cycle">
+                <span class="label-text">Particle Color</span>
+                <input type="color" data-var="PARTICLES" value="#a78bfa">
               </label>
-    
-              <label class="field" title="Defines the upped bound for the particle color cycle">
-                <span class="label-text">Particle High</span>
-                <input type="color" data-var="--particle-high" value="#60a5fa">
+
+              <label class="field" title="Defines the particle opacity">
+                <span class="label-text">Particle Opacity</span>
+                <div class="slider-wrapper">
+                    <div style="position: relative;">
+                        <input type="range" id="particleOpacitySlider" class="custom-slider" min="0" max="100" value="50">
+                        <div class="slider-value" id="particleOpacitySliderValue">50</div>
+                    </div>
+                    <div class="slider-info">
+                        <span>0%</span>
+                        <span>100%</span>
+                    </div>
+                </div>
               </label>
 
               <label class="field" title="Defines shadow direction and magnitude">
@@ -363,6 +374,8 @@
   </footer>
 
   <script src="js/app.js"></script>
+  <script src="js/slider.js"></script>
   <script src="js/shadowPicker.js"></script>
+  <script src="js/themeSystem.js"></script>
 </body>
 </html>
