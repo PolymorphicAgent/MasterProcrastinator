@@ -407,8 +407,7 @@ function renderItem(task, isCompleted=false) {
   const dueEl = li.querySelector('.due');
   dueEl.textContent = formatDue(task.due);
   li.querySelector('.desc').innerHTML =
-  (simpleMarkdown(task.description) || '')
-    .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
+    simpleMarkdown((task.description || '').replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>'));
 
 
   // Attachments
