@@ -964,6 +964,11 @@ window.addEventListener("keypress", (e) => {
     //unfocus the element
     // document.getElementById('particleCount').blur();
   }
+  else if(e.key === "Enter" && els.itemDialog.open){
+    e.preventDefault();
+    //save
+    els.saveItemBtn.click();
+  }
 });
 
 function repelParticles() {
