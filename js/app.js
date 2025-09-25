@@ -413,7 +413,7 @@ window.addEventListener("keypress", (e) => {
     //force-update particles
     document.getElementById('particleCount').value = document.getElementById('particleCount').value;
   }
-  else if(e.key === "Enter" && els.itemDialog.open){
+  else if(e.key === "Enter" && els.itemDialog.open && els.descInput != document.activeElement){
     e.preventDefault();
     //save
     els.saveItemBtn.click();
