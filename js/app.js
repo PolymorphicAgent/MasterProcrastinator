@@ -206,6 +206,7 @@ async function openEditor(id=null) {
     }
   }
   els.itemDialog.showModal();
+  els.titleInput.focus();
 }
 
 // Update
