@@ -56,3 +56,39 @@ Access the site [https://todo.polimorph.dev](https://todo.polimorph.dev). All da
 - To open the project locally, clone the repository and open `index.html` in a web browser. 
 
 - For development, it's recommended to use a local server (i.e. using the Live Server extension in VSCode, or python `python3 -m http.server 8080`) to avoid CORS issues with IndexedDB.
+
+## TODO
+- Add new color themes (Currently in development)
+    - Support saving/loading/editing custom color themes
+
+- Introduce a versioning system to show new updates
+    - Global application version
+    - Once a day, check for new version (maybe from github?) (maybe have a setting for this?)
+    - If new version available, prompt user to reload the page
+    - Whenever the page upgrades to a new version, show a "What's New" dialog
+
+- Fix n key double triggering dialog and registering n in the new task description
+- Fix hitting export twice for the thing to export
+- Style scrollbar on description box
+- Add a "new task here" on hover between tasks
+- Add the ability to distinguish between tasks and events
+- Add the ability to select multiple tasks to move/delete/complete them
+- Add periodic render calls (dates lag behind if left open overnight)
+- Add the ability to save icons and colors globally so that they can be easily selected from when creating a task
+- Add a numbers (x/x) or percentage for the progress bar
+- Fix issue where long descriptions over-expand page horizontally
+- Add page autoscroll on drag
+- Add move to top & swap with buttons for each task (on hover)
+- Save date created and have a setting to display date created on each task tile (the date will show when you hit 'edit')
+- Fix that stupid selection arrow hover for the sorting dropdown
+    - https://stackoverflow.com/questions/14218307/select-arrow-style-change
+
+
+
+- Wayyyy in the future if possible
+    - calendar view for events with due dates
+    - integrated pomodoro timer
+
+## Feature Requests
+*Think of a new feature/bug fix that's not in the list above?*
+- Open an issue with the appropriate tag (i.e. 'bug' if it's a bug, 'feature-request' if it's a feature request)!
