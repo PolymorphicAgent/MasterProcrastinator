@@ -97,6 +97,14 @@ async function loadLocal() {
 
 // ---------- Utilities ----------
 
+// onLoad helper
+function onPageLoad(){
+    if(!localStorage.noFirstVisit){
+        showReadme();
+        localStorage.noFirstVisit=true;
+    }
+}
+
 // formatDue helper
 function parseDateLocal(iso) {
   // Parse "YYYY-MM-DD" into a local Date at midnight to avoid UTC shift issues.
