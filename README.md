@@ -61,13 +61,12 @@ Access the site [https://todo.polimorph.dev](https://todo.polimorph.dev). All da
 - Add new color themes (Currently in development)
     - Support saving/loading/editing custom color themes
 
-- Introduce a versioning system to show new updates
+- Introduce a versioning system to show new updates (Currently in development)
     - Global application version
     - Once a day, check for new version (maybe from github?) (maybe have a setting for this?)
     - If new version available, prompt user to reload the page
     - Whenever the page upgrades to a new version, show a "What's New" dialog
 
-- Fix n key double triggering dialog and registering n in the new task description
 - Fix hitting export twice for the thing to export
 - Style scrollbar on description box
 - Add a "new task here" on hover between tasks
