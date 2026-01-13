@@ -67,6 +67,7 @@ Access the site [https://todo.polimorph.dev](https://todo.polimorph.dev). All da
     - If new version available, prompt user to reload the page
     - Whenever the page upgrades to a new version, show a "What's New" dialog
 
+- Add feedback capabilities and maybe the ability to send out polls to users
 - Fix hitting export twice for the thing to export
 - Style scrollbar on description box
 - Add a "new task here" on hover between tasks
