@@ -399,8 +399,7 @@ els.exportBtn.addEventListener('click', () => {
 
 // ---------- Keyboard shortcuts ----------
 window.addEventListener('keydown', (e) => {
-    e.preventDefault();
-  if (e.key === 'n' && !els.itemDialog.open && els.searchInput !== document.activeElement) { openEditor(); }
+  if (e.key === 'n' && !els.itemDialog.open && els.searchInput !== document.activeElement) { e.preventDefault(); openEditor(); }
 });
 
 // fixes hitting reset on enter
