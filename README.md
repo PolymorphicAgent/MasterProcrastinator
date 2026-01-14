@@ -33,7 +33,7 @@ A completely client-side task manager. Your data is stored locally in your brows
 - **Fully client-side, so your data never gets sent over the internet**
 
 ## Usage
-Access the site [https://todo.polimorph.dev](https://todo.polimorph.dev). All data is stored locally in your browser.
+Access the site [https://todo.polimorph.dev](https://todo.polimorph.dev).
 
 - Click `Add Task` to create a new task. You can attach files if desired
 
