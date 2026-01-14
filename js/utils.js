@@ -99,9 +99,26 @@ async function loadLocal() {
 
 // onLoad helper
 function onPageLoad(){
+
+    // If this is the user's first visit, show the readme dialog
     if(!localStorage.noFirstVisit){
         showReadme();
         localStorage.noFirstVisit=true;
+        localStorage.lastLoadedVersion = JSON.stringify(VERSION);
+        return;
+    }
+
+    console.log("lastLoadedVersion: "+ localStorage.lastLoadedVersion);
+    console.log("currentVersion: "+ JSON.stringify(VERSION));
+    
+    // Check if the current version is newer than the previous version
+    if(VERSION.ver > JSON.parse(localStorage.lastLoadedVersion).ver){
+
+        // Show the version readme
+        showVersionReadme();
+
+        // Save the current version
+        localStorage.lastLoadedVersion = JSON.stringify(VERSION);
     }
 }
 
@@ -158,7 +175,9 @@ function simpleMarkdown(md) {
 async function showReadme() {
   const modal = document.getElementById('readmeModal');
   const content = document.getElementById('readmeContent');
-  content.innerHTML = 'Loading…';
+  const title = document.getElementById('readmeDialogTitle');
+  title.innerHTML = 'ℹ️ About';
+  content.innerHTML = 'Loading...';
 
   try {
     const resp = await fetch('/README.md');
@@ -167,9 +186,34 @@ async function showReadme() {
     content.innerHTML = simpleMarkdown(text);
   } catch (err) {
     content.innerHTML = `<p style="color:red">Error loading README: ${err.message}</p>`;
+    title.innerHTML = `Error`;
+    title.style = "color:red; "+title.style;
   }
 
   modal.showModal();
+}
+
+async function showVersionReadme() {
+  const modal = document.getElementById('readmeModal');
+  const content = document.getElementById('readmeContent');
+  const title = document.getElementById('readmeDialogTitle');
+  content.innerHTML = 'Loading...';
+
+  try {
+    const path = '/version-readmes/'+VERSION.major+'.'+VERSION.minor+'.md';
+    const resp = await fetch(path);
+    if (!resp.ok) throw new Error('Version README not found at '+path);
+    const text = await resp.text();
+    content.innerHTML = simpleMarkdown(text);
+    title.innerHTML = path;
+  } catch (err) {
+    content.innerHTML = `<p style="color:red">Error loading Version README: ${err.message}</p>`;
+    title.innerHTML = `Error`;
+    title.style = "color:red; "+title.style;
+  }
+
+  modal.showModal();
+
 }
 
 function sanitize(str){ return (str || '').toString(); }

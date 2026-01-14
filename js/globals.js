@@ -1,4 +1,10 @@
 // Main Globals
+const VERSION = {
+    major: 1,
+    minor: 0,
+    ver: 1.0
+};
+
 const _objectURLs = new Set();
 
 const uid = () => 't_' + Math.random().toString(36).slice(2,10);
