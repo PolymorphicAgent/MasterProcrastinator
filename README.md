@@ -61,24 +61,22 @@ Access the site [https://todo.polimorph.dev](https://todo.polimorph.dev).
 - Add new color themes (Currently in development)
     - Support saving/loading/editing custom color themes
 
-- Introduce a versioning system to show new updates (Currently in development)
-    - Global application version
+- Extend versioning system (next in development queue)
     - Once a day, check for new version (maybe from github?) (maybe have a setting for this?)
     - If new version available, prompt user to reload the page
-    - Whenever the page upgrades to a new version, show a "What's New" dialog
+    - If failed to get new version, notify user through some sort of custom push notification
 
+- Add a numbers (x/x) or percentage for the progress bar
+- Fix issue where long descriptions over-expand page horizontally
+- Add page autoscroll on drag
+- Add move to top & swap with buttons for each task (on hover)
 - Add feedback capabilities and maybe the ability to send out polls to users
 - Fix hitting export twice for the thing to export
 - Style scrollbar on description box
 - Add a "new task here" on hover between tasks
 - Add the ability to distinguish between tasks and events
 - Add the ability to select multiple tasks to move/delete/complete them
-- Add periodic render calls (dates lag behind if left open overnight)
 - Add the ability to save icons and colors globally so that they can be easily selected from when creating a task
-- Add a numbers (x/x) or percentage for the progress bar
-- Fix issue where long descriptions over-expand page horizontally
-- Add page autoscroll on drag
-- Add move to top & swap with buttons for each task (on hover)
 - Save date created and have a setting to display date created on each task tile (the date will show when you hit 'edit')
 - Fix that stupid selection arrow hover for the sorting dropdown
     - https://stackoverflow.com/questions/14218307/select-arrow-style-change

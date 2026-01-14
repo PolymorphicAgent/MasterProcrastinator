@@ -124,13 +124,22 @@ function onPageLoad(){
     }
 }
 
-function periodicTasks() {
+async function periodicTasks() {
     //console.log('Running at:', new Date().toLocaleTimeString());
 
     // Call render periodically so that due dates don't lag behind if the tab is left open overnight
     render();
 
-    //
+    // TODO: Check for new version
+    //  try {
+    //     const resp = await fetch('/latest.json');
+    //     if (!resp.ok) throw new Error('latest.json not found');
+    //     const text = await resp.text();
+    //     var latest = JSON.parse(text).latestVersion;
+    // } catch (err) {
+    //     //TODO: show user the error somehow
+    // }
+
 }
 
 
