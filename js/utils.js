@@ -100,6 +100,8 @@ async function loadLocal() {
 // onLoad helper
 function onPageLoad(){
 
+    setInterval(periodicTasks, 20 * 60000); // Every 20 minutes
+
     // If this is the user's first visit, show the readme dialog
     if(!localStorage.noFirstVisit){
         showReadme();
@@ -121,6 +123,17 @@ function onPageLoad(){
         localStorage.lastLoadedVersion = JSON.stringify(VERSION);
     }
 }
+
+function periodicTasks() {
+    //console.log('Running at:', new Date().toLocaleTimeString());
+
+    // Call render periodically so that due dates don't lag behind if the tab is left open overnight
+    render();
+
+    //
+}
+
+
 
 // formatDue helper
 function parseDateLocal(iso) {
