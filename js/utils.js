@@ -158,20 +158,6 @@ function ensurePathLength(inpString, length){
     else return inpString;
 }
 
-function simpleMarkdown(md) {
-  return md
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-    .replace(/\*\*(.*?)\*\*/gim, '<b>$1</b>')
-    .replace(/\*(.*?)\*/gim, '<i>$1</i>')
-    .replace(/`([^`]+)`/gim, '<code>$1</code>')
-    .replace(/^\s*[-*] (.*$)/gim, '<ul><li>$1</li></ul>')
-    .replace(/\n$/gim, '<br>')
-    .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank">$1</a>');
-}
-
 async function showReadme() {
   const modal = document.getElementById('readmeModal');
   const content = document.getElementById('readmeContent');
@@ -183,7 +169,7 @@ async function showReadme() {
     const resp = await fetch('/README.md');
     if (!resp.ok) throw new Error('README not found');
     const text = await resp.text();
-    content.innerHTML = simpleMarkdown(text);
+    content.innerHTML = marked.parse(text);
   } catch (err) {
     content.innerHTML = `<p style="color:red">Error loading README: ${err.message}</p>`;
     title.innerHTML = `Error`;
@@ -204,7 +190,7 @@ async function showVersionReadme() {
     const resp = await fetch(path);
     if (!resp.ok) throw new Error('Version README not found at '+path);
     const text = await resp.text();
-    content.innerHTML = simpleMarkdown(text);
+    content.innerHTML = marked.parse(text);
     title.innerHTML = path;
   } catch (err) {
     content.innerHTML = `<p style="color:red">Error loading Version README: ${err.message}</p>`;
