@@ -66,6 +66,10 @@ Access the site [https://todo.polimorph.dev](https://todo.polimorph.dev).
     - If new version available, prompt user to reload the page
     - If failed to get new version, notify user through some sort of custom push notification
 
+- Custom push notification system (to alert user of errors/updates/polls/etc.)
+- Custom popup dialog system (instead of relying on alert(), confirm(), and prompt())
+
+- little animation when checking a task off  
 - Add a numbers (x/x) or percentage for the progress bar
 - Fix issue where long descriptions over-expand page horizontally
 - Add page autoscroll on drag
