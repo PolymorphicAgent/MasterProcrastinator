@@ -109,3 +109,14 @@ document.getElementById("particlesToggle").onchange = e => {
 window.addEventListener("beforeunload", function(e){
    saveLocal();
 });
+
+// Save when the tab is unfocused, call render() when focused
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        console.log("Saving...");
+        saveLocal();
+    } else {
+        console.log("Calling render()...");
+        render();
+    }
+});
