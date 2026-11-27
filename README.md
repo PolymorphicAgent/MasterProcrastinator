@@ -69,6 +69,7 @@ Access the site [https://todo.polimorph.dev](https://todo.polimorph.dev).
 - Custom push notification system (to alert user of errors/updates/polls/etc.)
 - Custom popup dialog system (instead of relying on alert(), confirm(), and prompt())
 
+- auto-shorten links if possible
 - little animation when checking a task off  
 - Add a numbers (x/x) or percentage for the progress bar
 - Fix issue where long descriptions over-expand page horizontally

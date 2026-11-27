@@ -1,13 +1,3 @@
-/* Master Procrastinator — Client-side, no dependencies (for now).
-   Features:
-   - Drag-to-reorder within Active list
-   - Title, due date, description, color, optional icon thumbnail
-   - Attach multiple files per task (stored as data URLs for export)
-   - Light/Dark theme toggle with persistence
-   - Export/Import JSON (attachments inlined as base64 data URLs)
-   - LocalStorage autosave
-*/
-
 // ---------- Rendering ----------
 function render() {
   
@@ -358,8 +348,7 @@ els.clearCompletedBtn.addEventListener('click', () => {
 });
 
 // ---------- Export/Import ----------
-els.exportBtn.addEventListener('click', () => {
-  els.exportBtn.addEventListener('click', async () => {
+els.exportBtn.addEventListener('click', async () => {
   // Build full export object with attachments inlined
   const exportTasks = [];
   for (const t of state.tasks) {
@@ -395,8 +384,6 @@ els.exportBtn.addEventListener('click', () => {
   setTimeout(()=>URL.revokeObjectURL(url), 3000);
 });
 
-});
-
 // ---------- Keyboard shortcuts ----------
 window.addEventListener('keydown', (e) => {
   if (e.key === 'n' && !els.itemDialog.open && els.searchInput !== document.activeElement) { e.preventDefault(); openEditor(); }
@@ -421,24 +408,60 @@ window.addEventListener("keypress", (e) => {
   }
 });
 
-// ---------- Theme ----------
-function applyTheme(t) {
-  document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
-  state.theme = t;
-  localStorage.setItem('hw.theme', t);
-  // Update particle colors to match new theme
-  if (material) {
-    const p = PARTICLE_COLORS[t];
-    material.color.setHSL(p.h/360, p.s, p.l);
-    material.opacity = p.opacity;
+// // ---------- Theme ----------
+// function applyTheme(t) {
+//   document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+//   state.theme = t;
+//   localStorage.setItem('hw.theme', t);
+//   // Update particle colors to match new theme
+//   if (material) {
+//     const p = PARTICLE_COLORS[t];
+//     material.color.setHSL(p.h/360, p.s, p.l);
+//     material.opacity = p.opacity;
+//   }
+// }
+// (function initTheme(){
+//   const stored = localStorage.getItem('hw.theme');
+//   applyTheme(stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+// })();
+// els.themeToggle.addEventListener('click', () => applyTheme(state.theme === 'dark' ? 'light' : 'dark'));
+// // window.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='t' && !els.itemDialog.open) els.themeToggle.click(); });
+
+// ---------- Theme Toggle Button ----------
+// Quick toggle cycles between preset themes that are light/dark counterparts
+els.themeToggle.addEventListener('click', () => {
+  // Get all themes and find current index
+  const allThemes = getAllThemes();
+  const currentIndex = allThemes.findIndex(t => t.id === activeThemeId);
+  
+  // Find the next theme (cycle through)
+  // Or toggle between light/dark if we're on a preset
+  const currentTheme = getThemeById(activeThemeId);
+  const isCurrentLight = isLightColor(currentTheme?.vars?.['--bg'] || '#0b1220');
+  
+  // Try to find a theme of opposite brightness
+  let nextTheme = null;
+  
+  // First, look for a direct light/dark counterpart
+  if (isCurrentLight) {
+    // Find a dark theme
+    nextTheme = allThemes.find(t => !isLightColor(t.vars?.['--bg'] || '#0b1220'));
+  } else {
+    // Find a light theme
+    nextTheme = allThemes.find(t => isLightColor(t.vars?.['--bg'] || '#ffffff'));
   }
-}
-(function initTheme(){
-  const stored = localStorage.getItem('hw.theme');
-  applyTheme(stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
-})();
-els.themeToggle.addEventListener('click', () => applyTheme(state.theme === 'dark' ? 'light' : 'dark'));
-// window.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='t' && !els.itemDialog.open) els.themeToggle.click(); });
+  
+  // If no counterpart found, just cycle to next theme
+  if (!nextTheme) {
+    const nextIndex = (currentIndex + 1) % allThemes.length;
+    nextTheme = allThemes[nextIndex];
+  }
+  
+  if (nextTheme) {
+    selectTheme(nextTheme.id);
+  }
+});
+
 
 // Initial functions
 (async function initApp(){

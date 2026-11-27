@@ -3,7 +3,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 
-const PARTICLE_COLORS = {
+PARTICLE_COLORS = {
   dark: { h: 220, s: 0.9, l: 0.1, opacity: 0.22 },
   light: { h: 220, s: 1.3, l: 0.6, opacity: 0.72 },
 };

@@ -13,10 +13,11 @@
   <link rel="stylesheet" href="css/checkBox.css"/>
   <link rel="stylesheet" href="css/form-grid.css"/>
   <link rel="stylesheet" href="css/readmeModal.css"/>
+  <link rel="stylesheet" href="css/themeSystem.css" />
   <link rel="stylesheet" href="css/progress-bar.css"/>
   <link rel="stylesheet" href="css/styledSlider.css"/>
-  <link rel="stylesheet" href="css/animatedTitle.css"/>
   <link rel="stylesheet" href="css/shadowPicker.css" />
+  <link rel="stylesheet" href="css/animatedTitle.css"/>
   <link rel="stylesheet" href="css/backgroundCanvas.css"/>
   <link rel="icon" href="img/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -119,96 +120,93 @@
         </section>
         <!-- <p style="height: 0px; margin-top: 0;margin-bottom: 0;padding: 0px 0px;"></p> -->
 
-
-
         <!-- Preset themes section -->
-        <p class="span-2 hint fira-code" style="text-align: center;">WARNING! EXPERIMENTAL FEATURES BELOW NOT FULLY IMPLEMENTED. UNDER CONSTRUCTION!</p>
+        <p class="span-2 hint fira-code" style="text-align: center;">EXPERIMENTAL THEME SYSTEM IS UNDER CONSTRUCTION!</p>
         <div class="span-2 section">
           <div class="section-header">
             <h3>Preset themes</h3>
-            <small class="hint">Choose a theme tile to change the appearance of the app!</small>
+            <small class="hint">Click a tile to apply a theme instantly!</small>
           </div>
           <div id="theme-presets" class="presets-grid" aria-label="Theme presets">
-            <!-- Preset theme tiles rendered by app.js -->
+            <!-- Preset theme tiles rendered by themeSystem.js -->
           </div>
         </div>
         <!-- Theme editor (create / edit custom themes) -->
         <section class="span-2 section">
           <div class="section-header">
             <h3>Theme editor</h3>
-            <small class="hint">Create a custom theme and save/export it. Preview updates live!</small>
+            <small class="hint">Customize colors and save as a new theme. Changes preview live!</small>
           </div>
     
           <form id="theme-editor" autocomplete="off">
             <div class="editor-grid">
               <!-- CSS variables we allow the user to edit -->
-              <label class="field" title="Defines the background color" style="background: var(--bg);">
+              <label class="field" title="Background color of the entire app">
                 <span class="label-text">Background</span>
                 <input type="color" data-var="--bg" value="#0b1220">
-<!-- TODO: make the values grab their color from the currently applied theme! -->
               </label>
     
-              <label class="field" title="Defines the color of most text on the page" style="background: var(--text);color: var(--bg);">
+              <label class="field" title="Main text color">
                 <span class="label-text">Text</span>
                 <input type="color" data-var="--text" value="#e6eef8">
               </label>
 
-              <label class="field" title="Defines the color of Surfaces (i.e. cards, UI elements, etc.)"  style="background: var(--surface);">
-                <span class="label-text">Surfaces</span>
-                <input type="color" data-var="--surface" value="#e6eef8">
+              <label class="field" title="Card and panel backgrounds">
+                <span class="label-text">Surface</span>
+                <input type="color" data-var="--surface" value="#151f32">
               </label>
 
-              <label class="field" title="Defines the color of secondary surfaces (i.e. UI sub-elements, etc.)" style="background: var(--surface-2);">
-                <span class="label-text">Secondary Surfaces</span>
-                <input type="color" data-var="--surface-2" value="#e6eef8">
+              <label class="field" title="Secondary surface color">
+                <span class="label-text">Surface 2</span>
+                <input type="color" data-var="--surface-2" value="#1c2a42">
               </label>
               
-              <label class="field" title="Defines the color of hyperlinks" style="background: var(--link);">
+              <label class="field" title="Hyperlink color">
                 <span class="label-text">Links</span>
-                <input type="color" data-var="--link" value="#e6eef8">
+                <input type="color" data-var="--link" value="#60a5fa">
               </label>
 
-              <label class="field" title="Defines the color of description text and other minor elements" style="background: var(--muted);">
+              <label class="field" title="Muted text and secondary elements">
                 <span class="label-text">Muted</span>
-                <input type="color" data-var="--muted" value="#e6eef8">
+                <input type="color" data-var="--muted" value="#8892a6">
               </label>
 
-              <label class="field" title="Defines the primary color throughout the application" style="background: var(--primary);">
+              <label class="field" title="Primary accent color (buttons, highlights)">
                 <span class="label-text">Primary</span>
-                <input type="color" data-var="--primary" value="#e6eef8">
+                <input type="color" data-var="--primary" value="#6d28d9">
               </label>
 
-              <label class="field" title="Usually a little whiter than the Primary color" style="background: var(--primary-500);">
-                <span class="label-text">Primary (500)</span>
-                <input type="color" data-var="--primary-500" value="#e6eef8">
+              <label class="field" title="Primary color hover state">
+                <span class="label-text">Primary 500</span>
+                <input type="color" data-var="--primary-500" value="#7c3aed">
               </label>
 
-              <label class="field" title="Defines the accent color" style="background: var(--accent);">
+              <label class="field" title="Accent color for highlights and badges">
                 <span class="label-text">Accent</span>
                 <input type="color" data-var="--accent" value="#6ee7b7">
               </label>
 
-              <label class="field" title="Defines the focus outline color" style="background: var(--ring);">
+              <label class="field" title="Focus ring color">
                 <span class="label-text">Ring</span>
-                <input type="color" data-var="--ring" value="#6ee7b7">
+                <input type="color" data-var="--ring" value="#6d28d9">
               </label>
 
-              <label class="field" title="Defines the card border color (and is used for some UI elements)" style="background: var(--border);">
+              <label class="field" title="Border color for cards and inputs">
                 <span class="label-text">Border</span>
-                <input type="color" data-var="--border" value="#6ee7b7">
+                <input type="color" data-var="--border" value="#2e3a50">
               </label>
     
-              <label class="field" title="Defines the starting color for the particle color cycle">
+              <label class="field" title="Base color for background particles">
                 <span class="label-text">Particle Color</span>
-                <input type="color" data-var="PARTICLES" value="#a78bfa">
+                <input type="color" data-var="PARTICLES" value="#1a365d">
               </label>
 
-              <label class="field" title="Defines the particle opacity">
+              <label class="field" title="Opacity of background particles">
                 <span class="label-text">Particle Opacity</span>
                 <div class="slider-wrapper">
                     <div style="position: relative;">
-                        <input type="range" id="particleOpacitySlider" class="custom-slider" min="0" max="100" value="50">
-                        <div class="slider-value" id="particleOpacitySliderValue">50</div>
+                        <input type="range" id="particleOpacitySlider" class="custom-slider" min="0" max="100" value="22">
+                        <div class="slider-value" id="particleOpacitySliderValue">22%</div>
                     </div>
                     <div class="slider-info">
                         <span>0%</span>
@@ -217,7 +215,7 @@
                 </div>
               </label>
 
-              <label class="field" title="Defines shadow direction and magnitude">
+              <label class="field" title="Shadow direction and distance">
                 <span class="label-text">Shadow Direction</span>
                 <div>
                     <!-- SVG picker -->
@@ -246,28 +244,26 @@
                 </div>
               </label>
 
-              <label class="field" title="Defines the color of shadows" style="background: var(--card-shadow);">
-                <span class="label-text">Shadow color</span>
+              <label class="field" title="Color of card shadows">
+                <span class="label-text">Shadow Color</span>
                 <input id="shadowPicker" type="color" value="#000000">
               </label>
 
             </div>
-    
-            <div>
-              <div class="editor-controls">
-                <input id="theme-name" type="text" placeholder="Custom Theme Name" style="width: 75%;align-self: center;"/>
-                <div class="button-row">
-                  <button id="save-theme" type="button" class="btn">Save Theme to Browser</button>
-                  <button id="delete-theme" type="button" class="btn ghost">Reset Selection to Current Theme</button>
-                </div>
-    
-                <div class="import-export">
-                  <label class="file-label">
-                    <input type="file" id="import-theme" accept=".json" />
-                    <button id="import-theme-btn" type="button" class="primary-btn">Import Theme From File</button>
-                  </label>
-                  <button id="export-theme" type="button" class="primary-btn">Export Theme to File</button>
-                </div>
+            <div class="editor-controls">
+            <input id="theme-name" type="text" placeholder="Enter a name for your custom theme..."/>
+            <div class="button-row">
+                <button id="save-theme" type="button" class="btn">Save as Custom Theme</button>
+                <button id="delete-theme" type="button" class="btn ghost">Reset to Current</button>
+            </div>
+
+            <div class="import-export">
+                <label class="file-label">
+                <input type="file" id="import-theme" accept=".json" />
+                <button id="import-theme-btn" type="button" class="primary-btn">Import Theme</button>
+                </label>
+                <button id="export-theme" type="button" class="primary-btn">Export Theme</button>
+                
               </div>
             </div>
           </form>

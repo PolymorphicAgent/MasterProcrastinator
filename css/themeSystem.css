@@ -1,0 +1,408 @@
+/* ============================================================================
+   THEME SYSTEM STYLES
+   ============================================================================ */
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   PRESETS GRID
+   ───────────────────────────────────────────────────────────────────────────── */
+.presets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    padding: 16px;
+    max-height: 320px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--surface-2);
+}
+
+.presets-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.presets-grid::-webkit-scrollbar-track {
+    background: var(--surface-2);
+    border-radius: 3px;
+}
+
+.presets-grid::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   THEME TILE
+   ───────────────────────────────────────────────────────────────────────────── */
+.theme-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 8px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+}
+
+.theme-tile:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.theme-tile.active {
+    border-color: var(--accent);
+    background: var(--surface-2);
+    box-shadow: 0 0 0 2px var(--accent), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.theme-tile.active::after {
+    content: '✓';
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TILE PREVIEW (Color circles)
+   ───────────────────────────────────────────────────────────────────────────── */
+.theme-tile-preview {
+    width: 80px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    padding: 6px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-color-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TILE NAME & BADGE
+   ───────────────────────────────────────────────────────────────────────────── */
+.theme-tile-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.theme-custom-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--accent);
+    background: rgba(110, 231, 183, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TILE DELETE BUTTON
+   ───────────────────────────────────────────────────────────────────────────── */
+.theme-tile-delete {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #ef4444;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.theme-tile:hover .theme-tile-delete {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.theme-tile-delete:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   EDITOR GRID
+   ───────────────────────────────────────────────────────────────────────────── */
+.editor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    padding: 16px;
+}
+
+.editor-grid .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.2s ease;
+}
+
+.editor-grid .field:hover {
+    border-color: var(--primary);
+}
+
+.editor-grid .field .label-text {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.editor-grid input[type="color"] {
+    width: 100%;
+    height: 36px;
+    padding: 2px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    background: transparent;
+}
+
+.editor-grid input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
+
+.editor-grid input[type="color"]::-webkit-color-swatch {
+    border-radius: 4px;
+    border: none;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   EDITOR CONTROLS
+   ───────────────────────────────────────────────────────────────────────────── */
+.editor-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.editor-controls input[type="text"] {
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.editor-controls input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.2);
+}
+
+.editor-controls .button-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.editor-controls .btn {
+    flex: 1;
+    min-width: 140px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.editor-controls .btn:not(.ghost) {
+    background: var(--primary);
+    color: white;
+}
+
+.editor-controls .btn:not(.ghost):hover {
+    background: var(--primary-500);
+    transform: translateY(-1px);
+}
+
+.editor-controls .btn.ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+}
+
+.editor-controls .btn.ghost:hover {
+    color: var(--text);
+    border-color: var(--muted);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   IMPORT/EXPORT ROW
+   ───────────────────────────────────────────────────────────────────────────── */
+.import-export {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.import-export .file-label {
+    flex: 1;
+    min-width: 140px;
+}
+
+.import-export .file-label input[type="file"] {
+    display: none;
+}
+
+.import-export .primary-btn,
+.import-export button {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 12px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SECTION STYLING
+   ───────────────────────────────────────────────────────────────────────────── */
+.section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.section .section-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+}
+
+.section .section-header h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.section .section-header small.hint {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SLIDER WRAPPER (for particle opacity)
+   ───────────────────────────────────────────────────────────────────────────── */
+.slider-wrapper {
+    padding: 8px 0;
+}
+
+.slider-wrapper .custom-slider {
+    width: 100%;
+}
+
+.slider-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   RESPONSIVE ADJUSTMENTS
+   ───────────────────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .presets-grid {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    .theme-tile {
+        padding: 10px 6px;
+    }
+    
+    .theme-tile-preview {
+        width: 60px;
+        height: 40px;
+    }
+    
+    .theme-color-dot {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .theme-tile-name {
+        font-size: 10px;
+    }
+    
+    .editor-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 12px;
+    }
+    
+    .editor-controls .button-row {
+        flex-direction: column;
+    }
+    
+    .import-export {
+        flex-direction: column;
+    }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   ANIMATIONS
+   ───────────────────────────────────────────────────────────────────────────── */
+@keyframes tile-pulse {
+    0%, 100% { box-shadow: 0 0 0 2px var(--accent); }
+    50% { box-shadow: 0 0 0 4px var(--accent), 0 0 12px rgba(110, 231, 183, 0.3); }
+}
+
+.theme-tile.active {
+    animation: tile-pulse 2s ease-in-out infinite;
+}
+
+.theme-tile.active:hover {
+    animation: none;
+}

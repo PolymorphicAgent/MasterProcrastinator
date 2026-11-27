@@ -40,6 +40,12 @@ let state = {
   tasks: [],
   sort: 'manual',
   theme: 'dark',
+  themeSystem: {
+    customThemes: [],
+    activeThemeId: 'midnight',
+    previewMode: false,             // true when user is editing and previewing live
+    preEditThemeSnapshot: null      // to restore if user cancels
+  },
   autosaveAttachments: Boolean(localStorage.getItem('hw.autosaveAttachments') !== '0'),
   particles: true,
   particlesCount: parseInt(localStorage.getItem("hw.particlesCount")) || 3500,
