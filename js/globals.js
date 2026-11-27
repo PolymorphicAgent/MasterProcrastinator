@@ -61,7 +61,15 @@ let _dbPromise = null;
 const canvas = document.getElementById('three-canvas');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 10, 1000);
-const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+let renderer = null;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+} catch (err) {
+  // WebGL may be unavailable (e.g. hardware acceleration disabled or browser sandbox).
+  // Keep the rest of the application usable without the optional particle background.
+  console.warn('WebGL unavailable; background particles disabled.', err);
+  state.particles = false;
+}
 
 let originalPositions = [];
 let ripples = [];

@@ -161,6 +161,11 @@ function animate() {
   const scrollDiff = scrollY - lastScrollY;
   lastScrollY = scrollY;
 
+  if (!renderer || !particles || !geometry || !material) {
+    animationId = null;
+    return;
+  }
+
   particles.rotation.y += 0.0008;
   particles.rotation.x += 0.0005;
 
